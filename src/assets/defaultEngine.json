@@ -1,0 +1,73 @@
+{
+  "baidu": {
+    "name": "百度",
+    "url": "https://www.baidu.com/s?wd=",
+    "translation": "https://fanyi.baidu.com/#zh/en/",
+    "icon": "baidu"
+  },
+  "bing": {
+    "name": "必应",
+    "url": "https://www.bing.com/search?q=",
+    "translation": "https://www.bing.com/translator?text=",
+    "icon": "bing"
+  },
+  "google": {
+    "name": "Google",
+    "url": "https://www.google.com/search?q=",
+    "translation": "https://translate.google.com/?text=",
+    "icon": "google"
+  },
+  "sogou": {
+    "name": "搜狗",
+    "url": "https://www.sogou.com/sogou?query=",
+    "translation": "https://fanyi.sogou.com/text?keyword=",
+    "icon": "sogou"
+  },
+  "duckduckgo": {
+    "name": "DuckDuckGo",
+    "url": "https://duckduckgo.com/?q=",
+    "icon": "duckduckgo"
+  },
+  "yandex": {
+    "name": "Yandex",
+    "url": "https://yandex.com/search/?text=",
+    "translation": "https://translate.yandex.com/?text=",
+    "icon": "yandex"
+  },
+  "search-360": {
+    "name": "360 搜索",
+    "url": "https://www.so.com/s?q=",
+    "translation": "https://fanyi.so.com/#",
+    "icon": "search-360"
+  },
+  "weibo": {
+    "name": "微博",
+    "url": "https://s.weibo.com/weibo?q=",
+    "icon": "weibo"
+  },
+  "bilibili": {
+    "name": "BiliBili",
+    "url": "https://search.bilibili.com/all?keyword=",
+    "icon": "bilibili"
+  },
+  "github": {
+    "name": "Github",
+    "url": "https://github.com/search?q=",
+    "icon": "github"
+  },
+  "zhihu": {
+    "name": "知乎",
+    "url": "https://www.zhihu.com/search?q=",
+    "icon": "zhihu"
+  },
+  "jingdong": {
+    "name": "京东",
+    "url": "https://search.jd.com/Search?keyword=",
+    "icon": "jingdong"
+  },
+  "taobao": {
+    "name": "淘宝",
+    "url": "https://s.taobao.com/search?q=",
+    "icon": "taobao"
+  }
+}

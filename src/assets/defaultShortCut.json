@@ -1,0 +1,128 @@
+[
+  {
+    "categoryName": "视频网站",
+    "websiteDataList": [
+      {
+        "name": "哔哩哔哩",
+        "url": "https://www.bilibili.com/"
+      },
+      {
+        "name": "腾讯视频",
+        "url": "https://v.qq.com/"
+      },
+      {
+        "name": "爱奇艺",
+        "url": "https://www.iqiyi.com/"
+      },
+      {
+        "name": "优酷",
+        "url": "https://www.youku.com/"
+      },
+      {
+        "name": "搜狐视频",
+        "url": "https://tv.sohu.com/"
+      },
+      {
+        "name": "芒果TV",
+        "url": "https://www.mgtv.com/"
+      },
+      {
+        "name": "PPTV",
+        "url": "https://www.pptv.com/"
+      },
+      {
+        "name": "风行网",
+        "url": "http://www.fun.tv/"
+      },
+      {
+        "name": "AcFun",
+        "url": "http://www.acfun.cn/"
+      },
+      {
+        "name": "迅雷看看",
+        "url": "http://www.kankan.com/"
+      },
+      {
+        "name": "乐视视频",
+        "url": "http://www.le.com/"
+      },
+      {
+        "name": "百度视频",
+        "url": "https://v.baidu.com/"
+      },
+      {
+        "name": "56视频",
+        "url": "http://www.56.com/"
+      }
+    ]
+  },
+  {
+    "categoryName": "新闻热点",
+    "websiteDataList": [
+      {
+        "name": "微博",
+        "url": "https://weibo.com/"
+      },
+      {
+        "name": "人民网",
+        "url": "http://www.people.com.cn/"
+      },
+      {
+        "name": "央视网",
+        "url": "http://www.cctv.com/"
+      },
+      {
+        "name": "搜狐新闻",
+        "url": "http://news.sohu.com/"
+      },
+      {
+        "name": "新浪新闻",
+        "url": "http://news.sina.com.cn/"
+      },
+      {
+        "name": "新华网",
+        "url": "http://www.xinhuanet.com/"
+      },
+      {
+        "name": "凤凰网",
+        "url": "http://news.ifeng.com/"
+      },
+      {
+        "name": "腾讯新闻",
+        "url": "https://news.qq.com/"
+      },
+      {
+        "name": "中国新闻网",
+        "url": "http://www.chinanews.com/"
+      },
+      {
+        "name": "南方网",
+        "url": "http://www.southcn.com/"
+      },
+      {
+        "name": "环球网",
+        "url": "http://www.huanqiu.com/"
+      },
+      {
+        "name": "澎湃新闻",
+        "url": "https://www.thepaper.cn/"
+      },
+      {
+        "name": "新京报",
+        "url": "http://www.bjnews.com.cn/"
+      },
+      {
+        "name": "财新网",
+        "url": "http://www.caixin.com/"
+      },
+      {
+        "name": "21世纪经济报道",
+        "url": "http://www.21jingji.com/"
+      },
+      {
+        "name": "网易新闻",
+        "url": "http://news.163.com/"
+      }
+    ]
+  }
+]

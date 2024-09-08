@@ -1,0 +1,42 @@
+
+{
+  "id": 0,
+  "name": "翻译",
+  "url": "https://www.deepl.com/zh/translator"
+},
+{
+  "id": 1,
+  "name": "地图",
+  "url": "https://ditu.amap.com/"
+},
+{
+  "id": 2,
+  "name": "图片",
+  "url": "https://www.pexels.com/zh-cn/"
+},
+{
+  "id": 3,
+  "name": "云盘",
+  "url": "https://www.aliyundrive.com/drive/"
+},
+{
+  "id": 4,
+  "name": "Cloudflare",
+  "url": "https://dash.cloudflare.com/"
+},
+{
+  "id": 5,
+  "name": "邮箱",
+  "url": "https://mail.qq.com/"
+},
+{
+  "id": 6,
+  "name": "GitHub",
+  "url": "https://github.com/"
+},
+{
+  "id": 7,
+  "name": "哔哩哔哩",
+  "url": "https://www.bilibili.com/"
+
+}

@@ -1,0 +1,192 @@
+<template>
+  <Provider>
+    <!-- 壁纸 -->
+    <Cover @loadComplete="loadComplete" />
+    <!-- 主界面 -->
+    <Transition name="fade" mode="out-in">
+      <main
+        v-if="status.imgLoadStatus"
+        tabindex="0"
+        id="main"
+        :class="`main-${status.siteStatus}`"
+        :style="{ pointerEvents: mainClickable ? 'auto' : 'none' }"
+        @click="status.setSiteStatus('normal')"
+        @contextmenu="mainContextmenu"
+        @keydown="mainPressKeyboard"
+      >
+        <MenuList />
+
+        <WeatherTime />
+        <SearchInp @contextmenu.stop />
+        <AllFunc @contextmenu.stop />
+        <Footer />
+        <!-- 状态切换 -->
+        <!-- <Transition name="fade"> -->
+        <!-- </Transition> -->
+      </main>
+      <div v-else id="loading">
+        <img src="/icon/logo.png" alt="logo" class="logo" />
+        <span class="tip">开发中</span>
+      </div>
+    </Transition>
+  </Provider>
+</template>
+
+<script setup lang="ts">
+defineOptions({
+  name: 'App'
+});
+import { Edit } from '@element-plus/icons-vue'; // 引入 Edit 这个 svg组件
+import { onMounted, nextTick, watch, ref } from 'vue';
+import { statusStore, setStore } from '@/stores';
+import { getGreeting } from '@/utils/timeTools';
+import Provider from '@/components/Provider.vue';
+import Cover from '@/components/Cover.vue';
+import WeatherTime from '@/components/WeatherTime.vue';
+import SearchInp from '@/components/SearchInput/SearchInp.vue';
+import AllFunc from '@/components/AllFunc/index.vue';
+import Footer from '@/components/Footer.vue';
+import MenuList from '@/components/Layout/Menu.vue';
+
+const set = setStore();
+const status = statusStore();
+console.log('status', status);
+const mainClickable = ref<boolean>(false);
+
+// 获取配置
+const welcomeText: string = import.meta.env.VITE_WELCOME_TEXT ?? '欢迎访问本站';
+
+// 鼠标右键
+const mainContextmenu = (event: MouseEvent) => {
+  event.preventDefault();
+  status.setSiteStatus('set');
+};
+
+// 加载完成事件
+const loadComplete = () => {
+  nextTick().then(() => {
+    mainClickable.value = true;
+    window.$message.info(getGreeting() + '，' + welcomeText, {
+      showIcon: false,
+      duration: 3000
+    });
+  });
+};
+
+// 全局键盘事件
+const mainPressKeyboard = (event: KeyboardEvent) => {
+  const keyCode = event.keyCode;
+  // 回车
+  if (keyCode === 13) {
+    // focus 元素
+    const mainInput = document.getElementById('main-input') as HTMLInputElement;
+    status.setSiteStatus('focus');
+    mainInput?.focus();
+  }
+};
+
+// 根据主题类别更改
+const changeThemeType = (val: string) => {
+  const htmlElement = document.querySelector('html') as HTMLElement;
+  const themeType = val === 'light' ? 'light' : 'dark';
+  htmlElement.setAttribute('theme', themeType);
+};
+
+// 监听颜色变化
+watch(
+  () => set.themeType,
+  (val: string) => changeThemeType(val)
+);
+
+onMounted(() => {
+  changeThemeType(set.themeType);
+});
+</script>
+
+<style lang="scss" scoped>
+#main,
+#loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &.main-normal,
+  &.main-focus {
+    .main-box {
+      opacity: 0;
+      margin-top: 0;
+      transform: scale(0.35);
+      pointer-events: none;
+    }
+  }
+  &.main-box,
+  &.main-set {
+    .main-box {
+      opacity: 1;
+      margin-top: 20vh;
+      transform: scale(1);
+      visibility: visible;
+      @media (max-width: 478px) {
+        margin-top: 22vh;
+      }
+    }
+    .search-input {
+      :deep(.all) {
+        opacity: 0;
+        width: 0;
+        visibility: hidden;
+      }
+    }
+  }
+  .all-controls {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    .change-status {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      padding: 8px;
+      border-radius: 8px;
+      color: var(--main-text-color);
+      z-index: 1;
+      transition:
+        opacity 0.3s,
+        background-color 0.3s,
+        transform 0.3s;
+      &:hover {
+        backdrop-filter: blur(20px);
+        background-color: var(--main-background-light-color);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+#loading {
+  color: var(--main-text-color);
+  .logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 24px;
+    animation: logo-breathe 3s infinite alternate;
+  }
+  .tip {
+    font-size: 20px;
+  }
+}
+</style>
