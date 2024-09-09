@@ -61,8 +61,10 @@ import { ref } from 'vue';
 import { statusStore, setStore } from '@/stores';
 import SearchEngine from '@/components/SearchInput/SearchEngine.vue';
 import Suggestions from '@/components/SearchInput/Suggestions.vue';
-import defaultEngine from '@/assets/defaultEngine.json';
-type strKey = { [str: string]: string };
+import defaultEngineValue from '@/assets/defaultEngine.json';
+import type { DefaultEngine } from '@/types/search.ts';
+const defaultEngine: DefaultEngine = defaultEngineValue;
+
 // 获取store实例
 const set = setStore();
 const status = statusStore();

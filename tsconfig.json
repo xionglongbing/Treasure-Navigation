@@ -17,7 +17,6 @@
       "@/*": ["src/*"], // 允许快捷访问src目录
       "@/components/*": ["src/components/*"] // 允许快捷访问components目录
     },
-    "noEmit": true,
     "types": ["element-plus/global", "node"] // 指定全局类型定义
   },
   "include": [

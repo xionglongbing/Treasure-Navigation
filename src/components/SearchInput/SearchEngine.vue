@@ -7,8 +7,8 @@
           <n-grid-item
             v-for="(item, key) in defaultEngine"
             :key="key"
-            :class="['engine', key === set.searchEngine ? 'choose' : null]"
-            @click="changeSearchEngine(key)"
+            :class="['engine', item.url === set.searchEngine ? 'choose' : null]"
+            @click="changeSearchEngine(item.url)"
           >
             <SvgIcon :iconName="`icon-${key}`" />
             <span class="name">{{ item.name }}</span>
@@ -72,7 +72,9 @@ import {
   NInput
 } from 'naive-ui';
 import { statusStore, setStore } from '@/stores';
-import defaultEngine from '@/assets/defaultEngine.json';
+import defaultEngineValue from '@/assets/defaultEngine.json';
+import type { DefaultEngine } from '@/types/search.ts';
+const defaultEngine: DefaultEngine = defaultEngineValue;
 
 // 获取store实例
 const set = setStore();

@@ -24,17 +24,6 @@ declare module '@/utils/identifyInput' {
 declare module '@/utils/domTools' {
   export const findMaxZIndex: (min?: number) => number;
 }
-declare module '@/assets/defaultEngine.json' {
-  interface defaultEngine {
-    [str: string]: {
-      name: string;
-      url: string;
-      translation: string;
-      icon: string;
-    };
-  }
-  export default defaultEngine;
-}
 declare module 'lunar-calendar' {
   // 定义 LunarData 接口
   interface LunarData {
