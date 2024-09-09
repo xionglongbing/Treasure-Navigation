@@ -384,11 +384,11 @@ function openWebsite(url: string) {
 .shortcut {
   width: 100%;
   height: 100%;
-  ::v-deep .n-collapse .n-collapse-item__header > .n-collapse-item__header-main {
+  :deep(.n-collapse) .n-collapse-item__header > .n-collapse-item__header-main {
     padding: 10px;
     border-radius: 8px;
   }
-  ::v-deep .n-collapse-item__header-main {
+  :deep(.n-collapse-item__header-main) {
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
     }

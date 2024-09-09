@@ -62,5 +62,8 @@ export default defineConfig({
     },
     // 省略后缀
     extensions: ['.js', '.ts', '.vue', '.json']
+  },
+  build: {
+    chunkSizeWarningLimit: 1000 // 设置为1000kB
   }
 });

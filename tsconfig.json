@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "strict": true,
-    "jsx": "preserve",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true,
-    "noEmit": true,
-    "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
+    "target": "ESNext", // 现代JavaScript版本
+    "module": "ESNext", // 使用ES模块规范
+    "moduleResolution": "Node", // Node模块解析策略
+    "strict": true, // 启用所有严格的类型检查选项
+    "jsx": "preserve", // 保留JSX内容
+    "resolveJsonModule": true, // 允许导入JSON模块
+    "isolatedModules": true, // 确保每个文件都被单独处理
+    "esModuleInterop": true, // 兼容CommonJS和ES模块的混合使用
+    "useDefineForClassFields": true, // 使用更现代的类字段声明方式
+    "lib": ["ESNext", "DOM"], // 包含最新的JavaScript和浏览器API
+    "skipLibCheck": true, // 跳过类型库检查，提升编译速度
+    "noEmit": true, // 不输出编译结果
+    "baseUrl": "./", // 基础路径，解析非相对路径模块
     "paths": {
-      //路径映射，相对于baseUrl
-      "@/*": ["src/*"],
-      "@/components/*": ["src/components/*"]
+      "@/*": ["src/*"], // 允许快捷访问src目录
+      "@/components/*": ["src/components/*"] // 允许快捷访问components目录
     },
-    "types": ["element-plus/global", "node"]
+    "noEmit": true,
+    "types": ["element-plus/global", "node"] // 指定全局类型定义
   },
   "include": [
     "src/**/*.ts",
@@ -26,15 +26,16 @@
     "src/**/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/**/*.d.ts",
     "src/**/**/*.vue"
   ],
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.node.json"
+      "path": "./tsconfig.node.json" // 引用node的配置
     },
     {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.app.json" // 引用app的配置
     }
   ]
 }
