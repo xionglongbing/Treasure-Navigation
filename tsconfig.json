@@ -11,7 +11,7 @@
     "useDefineForClassFields": true, // 使用更现代的类字段声明方式
     "lib": ["ESNext", "DOM"], // 包含最新的JavaScript和浏览器API
     "skipLibCheck": true, // 跳过类型库检查，提升编译速度
-    "noEmit": true, // 不输出编译结果
+    "emitDeclarationOnly": false,
     "baseUrl": "./", // 基础路径，解析非相对路径模块
     "paths": {
       "@/*": ["src/*"], // 允许快捷访问src目录
