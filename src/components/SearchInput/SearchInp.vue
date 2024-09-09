@@ -25,9 +25,7 @@
         <Transition name="fade" mode="out-in">
           <SvgIcon
             :iconName="`icon-${
-              set.searchEngine !== 'custom'
-                ? defaultEngine[set.searchEngine as keyof typeof defaultEngine]?.icon
-                : 'custom'
+              set.searchEngine !== 'custom' ? defaultEngine[set.searchEngine]?.icon : 'custom'
             }`"
             :key="set.searchEngine"
           />
