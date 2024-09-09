@@ -24,3 +24,20 @@ declare module '@/utils/identifyInput' {
 declare module '@/utils/domTools' {
   export const findMaxZIndex: (min?: number) => number;
 }
+declare module 'lunar-calendar' {
+  // 定义 LunarData 接口
+  interface LunarData {
+    lunarYear: number;
+    lunarMonth: number;
+    lunarDay: number;
+    GanZhiYear: string;
+    GanZhiMonth: string;
+    GanZhiDay: string;
+    lunarMonthName: string;
+    lunarDayName: string;
+    isLeapMonth: boolean;
+  }
+
+  // 声明一个函数 solarToLunar，返回 LunarData 对象
+  export function solarToLunar(year: number, month: number, day: number): LunarData;
+}

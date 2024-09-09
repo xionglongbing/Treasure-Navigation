@@ -72,7 +72,7 @@
 
 <script setup lang="ts">
 import { NScrollbar } from 'naive-ui';
-import { nextTick, ref, watch, Ref } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 import { statusStore, setStore } from '@/stores';
 import { getSearchSuggestions } from '@/api';
 import { debounce } from '@/utils/tool';
