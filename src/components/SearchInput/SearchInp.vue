@@ -25,7 +25,9 @@
         <Transition name="fade" mode="out-in">
           <SvgIcon
             :iconName="`icon-${
-              set.searchEngine !== 'custom' ? defaultEngine[set.searchEngine]?.icon : 'custom'
+              set.searchEngine !== 'custom'
+                ? defaultEngine[set.searchEngine as keyof typeof defaultEngine]?.icon
+                : 'custom'
             }`"
             :key="set.searchEngine"
           />
@@ -62,7 +64,7 @@ import { statusStore, setStore } from '@/stores';
 import SearchEngine from '@/components/SearchInput/SearchEngine.vue';
 import Suggestions from '@/components/SearchInput/Suggestions.vue';
 import defaultEngine from '@/assets/defaultEngine.json';
-
+type strKey = { [str: string]: string };
 // 获取store实例
 const set = setStore();
 const status = statusStore();

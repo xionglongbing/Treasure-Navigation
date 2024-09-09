@@ -18,7 +18,7 @@
       "@/*": ["src/*"],
       "@/components/*": ["src/components/*"]
     },
-    "types": ["element-plus/global"]
+    "types": ["element-plus/global", "node"]
   },
   "include": [
     "src/**/*.ts",

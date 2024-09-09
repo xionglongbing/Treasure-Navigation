@@ -7,11 +7,26 @@ jobs:
     name: wonderfulJourney
     runs-on: ubuntu-latest
     steps:
-      - name: 读取仓库内容
-        uses: actions/checkout@v4
+      # Step 1: 检出当前代码
+      - name: Checkout repository content
+        uses: actions/checkout@v3
 
-      - name: 安装依赖
+      # Step 2: 设置 Node.js 版本（例如 16.x）
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      # Step 3: 安装依赖包
+      - name: Install dependencies
         run: npm install
 
-      - name: 打包
+      # Step 4: 构建项目
+      - name: Build project
         run: npm run build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
