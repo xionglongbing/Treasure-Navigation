@@ -19,11 +19,11 @@ jobs:
 
       # Step 3: 安装依赖包
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       # Step 4: 构建项目
       - name: Build project
-        run: npm run build
+        run: pnpm run build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
