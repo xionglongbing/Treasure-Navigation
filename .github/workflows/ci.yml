@@ -11,26 +11,28 @@ jobs:
       - name: Checkout repository content
         uses: actions/checkout@v3
 
-      # Step 2: 设置 Node.js 版本（例如 16.x）
+      # Step 2: 设置 Node.js 版本
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      # Step 3: 安装依赖包
+      # Step 3: 安装 pnpm
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Step 3: 安装依赖包
+      # Step 4: 安装依赖包
       - name: Install dependencies
         run: pnpm install
 
-      # Step 4: 构建项目
+      # Step 5: 构建项目
       - name: Build project
         run: pnpm run build
 
+      # Step 6: 部署到 GitHub Pages
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: dist
+          token: ${{ secrets.GITHUB_TOKEN }} # 使用 GitHub Actions 自动生成的 GITHUB_TOKEN
