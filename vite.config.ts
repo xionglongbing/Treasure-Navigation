@@ -12,7 +12,7 @@ import IconsResolver from 'unplugin-icons/resolver';
 import Inspect from 'vite-plugin-inspect';
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/wonderfulJourney/',
+  base: './',
   plugins: [
     Vue(),
     AutoImport({
