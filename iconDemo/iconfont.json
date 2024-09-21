@@ -1,0 +1,23 @@
+{
+  "id": "3619316",
+  "name": "project导航",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "导航项目",
+  "glyphs": [
+    {
+      "icon_id": "11327570",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "e99e",
+      "unicode_decimal": 59806
+    },
+    {
+      "icon_id": "1695404",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    }
+  ]
+}
