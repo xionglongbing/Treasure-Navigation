@@ -7,7 +7,7 @@ const useSetDataStore = defineStore(
   () => {
     const state = reactive<SetDataState>({
       themeType: 'light',
-      backgroundType: 2,
+      backgroundType: 0,
       backgroundCustom: '',
       showBackgroundGray: true,
       backgroundBlur: 0,

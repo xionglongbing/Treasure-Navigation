@@ -37,7 +37,7 @@ const setBgUrl = () => {
   const { backgroundType, backgroundCustom } = set;
   switch (backgroundType) {
     case 0:
-      bgUrl.value = `/background/bg${bgRandom}.jpg`;
+      bgUrl.value = `./background/bg${bgRandom}.jpg`;
       break;
     case 1: {
       const isMobile = window.innerWidth < 768;
@@ -54,7 +54,7 @@ const setBgUrl = () => {
       bgUrl.value = backgroundCustom;
       break;
     default:
-      bgUrl.value = `/background/bg${bgRandom}.jpg`;
+      bgUrl.value = `./background/bg${bgRandom}.jpg`;
       break;
   }
 };
@@ -74,7 +74,7 @@ const imgAnimationEnd = () => {
 const imgLoadError = () => {
   console.error('壁纸加载失败：', bgUrl.value);
   window.$message.error('壁纸加载失败，已临时切换回默认');
-  bgUrl.value = `/background/bg${bgRandom}.jpg`;
+  bgUrl.value = `./background/bg${bgRandom}.jpg`;
 };
 
 // 组件挂载时执行
