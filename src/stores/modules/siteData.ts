@@ -5,6 +5,7 @@ import type {
   SiteDataState,
   WebsiteData,
   WebsiteDataInfo,
+  WebsiteOrBatchData,
   CategoryData,
   MessageInfo
 } from '../types/type';
@@ -45,14 +46,49 @@ const useSiteDataStore = defineStore(
     const addCategoryDataOrWebsiteData = ({
       categoryName,
       websiteData
-    }: WebsiteDataInfo): MessageInfo => {
+    }: WebsiteOrBatchData): MessageInfo => {
       console.log('categoryName', categoryName, websiteData);
       const categoryData = findCategoryData(categoryName);
 
+      //  有该分类就添加新网站
       if (categoryData) {
-        return addWebsiteData({ categoryName, websiteData, categoryData });
+        if (Array.isArray(websiteData)) {
+          let resMessageInfo: MessageInfo = { state: 'success', message: '批量导航添加成功' };
+          websiteData.forEach((websiteDataItem, index) => {
+            if (websiteDataItem.name && websiteDataItem.url) {
+              const res = addWebsiteData({
+                categoryName,
+                websiteData: websiteDataItem,
+                categoryData
+              });
+              if (res.state === 'error') {
+                resMessageInfo = res;
+              }
+            } else if (websiteDataItem.name || websiteDataItem.url) {
+              let res = '';
+              if (websiteDataItem.name) {
+                res = '导航名称';
+              } else {
+                res = '导航链接';
+              }
+              window.$message.error(`第${index}个导航${res}没有输入`);
+            }
+          });
+          return resMessageInfo;
+        } else {
+          return addWebsiteData({ categoryName, websiteData, categoryData });
+        }
       } else {
-        addCategoryData({ categoryName, websiteData });
+        if (Array.isArray(websiteData)) {
+          // 没有就添加新分类且添加新网站
+          websiteData.forEach((websiteDataItem) => {
+            if (websiteDataItem.name && websiteDataItem.url) {
+              addCategoryData({ categoryName, websiteData: websiteDataItem });
+            }
+          });
+        } else {
+          addCategoryData({ categoryName, websiteData });
+        }
         return { state: 'success', message: '新分类导航添加成功' };
       }
     };
@@ -68,10 +104,10 @@ const useSiteDataStore = defineStore(
       }
       const isDuplicate = findWebsiteData({ categoryName, websiteData });
       if (isDuplicate) {
-        return { state: 'error', message: '新增名称或链接与已有导航重复' };
+        return { state: 'error', message: `${websiteData.name}:新增名称或链接与已有导航重复` };
       } else {
         categoryData || (categoryData = findCategoryData(categoryName));
-        categoryData!.websiteDataList.push({ name: websiteData.name, url: websiteData.url });
+        categoryData!.websiteDataList.push({ ...websiteData });
         return { state: 'success', message: '导航添加成功' };
       }
     }
@@ -103,6 +139,11 @@ const useSiteDataStore = defineStore(
       return { state: 'error', message: '未找到对应的导航分类' };
     };
 
+    // 设置批量添加导航的数量
+    const batchAddCount = ref<number>(10);
+    function changebatchAddCount(count: number) {
+      batchAddCount.value = count;
+    }
     // 返回状态和方法
     return {
       ...toRefs(state),
@@ -110,7 +151,9 @@ const useSiteDataStore = defineStore(
       deleteShortcutItem,
       findCategoryData,
       findWebsiteData,
-      categoryNameList
+      categoryNameList,
+      batchAddCount,
+      changebatchAddCount
     };
   },
   {

@@ -56,6 +56,12 @@ export interface WebsiteDataInfo {
   websiteData: WebsiteData;
 }
 
+// 定义选中导航的数据
+export interface WebsiteOrBatchData {
+  categoryName: string;
+  websiteData: WebsiteData | WebsiteData[];
+}
+
 //返回的提示信息
 export interface MessageInfo {
   state: 'success' | 'error';

@@ -96,7 +96,8 @@
     v-model="isAddShortcutModalVisible"
     :editValue="selectWebsiteDataInfo"
     :isEditMode="isEditMode"
-    @addOrEditShortcuts="handleAddOrEditShortcut"
+    @handleAddOrEditShortcut="handleAddOrEditShortcut"
+    @handleBatchAddShortcut="handleBatchAddShortcut"
     @clearSelectedShortcut="clearSelectedShortcut"
   />
   <!-- <n-dropdown
@@ -257,11 +258,25 @@ function clearSelectedShortcut() {
 
 // 处理添加或编辑导航
 async function handleAddOrEditShortcut(categoryName: string, shortcutData: WebsiteData) {
-  const chainEdit = new ChainOfResponsibility(handleEditShortcut);
-  const chainAdd = new ChainOfResponsibility(handleAddShortcut);
-  const chainClose = new ChainOfResponsibility(closeAddShortcutModal);
+  // 使用职责链的设计模式
+  const chainEdit = new ChainOfResponsibility(handleEditShortcut); //判断编辑模式
+  const chainAdd = new ChainOfResponsibility(handleAddShortcut); //判断是否添加模式
+  const chainClose = new ChainOfResponsibility(closeAddShortcutModal); //关闭模态框
   chainEdit.setNext(chainAdd).setNext(chainClose);
   chainEdit.handle(categoryName, shortcutData);
+}
+
+async function handleBatchAddShortcut(
+  categoryName: string,
+  shortcutData: WebsiteData,
+  batchAddFormValues: WebsiteData[]
+) {
+  // 使用职责链的设计模式
+  const chainAdd = new ChainOfResponsibility(handleAddShortcut);
+  const chainClose = new ChainOfResponsibility(closeAddShortcutModal);
+  chainAdd.setNext(chainClose);
+  const newShortcutData = [shortcutData, ...batchAddFormValues];
+  chainAdd.handle(categoryName, newShortcutData);
 }
 
 // 处理编辑导航
@@ -287,7 +302,7 @@ function handleEditShortcut(categoryName: string, websiteData: WebsiteData) {
   return 'next';
 }
 
-function handleAddShortcut(categoryName: string, websiteData: WebsiteData) {
+function handleAddShortcut(categoryName: string, websiteData: WebsiteData | WebsiteData[]) {
   if (isEditMode.value) {
     return 'next';
   }

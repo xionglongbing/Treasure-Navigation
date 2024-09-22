@@ -38,8 +38,8 @@ export class ChainOfResponsibility implements Handler {
   handle(...arg: any[]) {
     const res = this.fn(...arg);
     if (res === 'next') {
-      return this.nextFn && this.nextFn.handle(...arg);
+      return this.nextFn?.handle(...arg);
     }
-    return null;
+    return res;
   }
 }
