@@ -1,41 +1,45 @@
-# wonderfulJourney
+## treasure-navigation
 
-![alt text](image.png)
+## 介绍
+
+- 一个非常自由的导航页面，提供了一些默认的网站，但是我们更希望每个用户根据自己的喜好来实现自定义的导航。该导航项目会持续个更新功能
+- 可以对该页面导航进行：1.增加导航 2.删除导航 3.更新原有导航信息 4.自由的拖拽导航排序，以及分类排序 5.批量增加导航 6.主页可以直接对内容进行搜索
+- 后续会逐渐添加各种使用的功能，有兴趣的朋友也可以加入到一起来开发
+
+## 背景
+
+1. 现在一打开的浏览器的广告太多，而且大多是标题党，垃圾广告推送。每次打开网页去搜索信息的时候，或者想要打开某个网页时，都可能一些夸张的信息吸引点进去，一不小心点进去就发现上了大当，容易一发不可收拾
+2. 想要收藏某些网页，希望能很快的打开想要浏览的网页。虽然可以用收藏夹来解决，但是我发现很多人的收藏夹乱七八糟。这个导航可以很方便的整理用户的导航快捷方式
+
+## 图片演示
+
 ![alt text](image-1.png)
-This template should help get you started developing with Vue 3 in Vite.
+![alt text](image-2.png)
+![alt text](image.png)
 
-## Recommended IDE Setup
+## 演示站点
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- [寻宝导航](https://xionglongbing.github.io/wonderfulJourney/)
 
-## Type Support for `.vue` Imports in TS
+## 技术栈
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- vue3
+- typescript
+- vite
 
-## Customize configuration
+## 部署
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- **提前安装** [node.js](https://nodejs.org/zh-cn/) **环境**
 
-## Project Setup
+- 在 `终端` 中输入：
 
-```sh
-pnpm install
-```
+  ```bash
+  # 安装 pnpm
+  npm install -g pnpm
 
-### Compile and Hot-Reload for Development
+  # 安装依赖
+  pnpm install
 
-```sh
-pnpm dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-pnpm build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+  # 开发
+  pnpm dev
+  ```
