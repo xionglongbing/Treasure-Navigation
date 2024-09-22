@@ -1,7 +1,8 @@
 <template>
   <n-modal
     preset="card"
-    :show="isVisible"
+    v-model:show="isVisible"
+    :mask-closable="false"
     :title="`${props.isEditMode ? '编辑' : '添加'}导航`"
     :bordered="false"
   >
