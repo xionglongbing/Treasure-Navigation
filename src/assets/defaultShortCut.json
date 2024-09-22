@@ -124,5 +124,119 @@
         "url": "http://news.163.com/"
       }
     ]
+  },
+  {
+    "categoryName": "编程开发",
+    "websiteDataList": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/"
+      },
+      {
+        "name": "Gitee",
+        "url": "https://gitee.com/"
+      },
+      {
+        "name": "Vue.js",
+        "url": "https://vuejs.org/"
+      },
+      {
+        "name": "React",
+        "url": "https://reactjs.org/"
+      },
+      {
+        "name": "菜鸟教程",
+        "url": "https://www.runoob.com/"
+      },
+      {
+        "name": "CSDN",
+        "url": "https://www.csdn.net/"
+      },
+      {
+        "name": "正则大全",
+        "url": "https://any86.github.io/any-rule/"
+      },
+      {
+        "name": "MDN Web Docs",
+        "url": "https://developer.mozilla.org/"
+      },
+      {
+        "name": "Stack Overflow",
+        "url": "https://stackoverflow.com/"
+      },
+      {
+        "name": "LeetCode",
+        "url": "https://leetcode.com/"
+      },
+      {
+        "name": "FreeCodeCamp",
+        "url": "https://www.freecodecamp.org/"
+      },
+      {
+        "name": "Codecademy",
+        "url": "https://www.codecademy.com/"
+      },
+      {
+        "name": "W3Schools",
+        "url": "https://www.w3schools.com/"
+      },
+      {
+        "name": "HackerRank",
+        "url": "https://www.hackerrank.com/"
+      },
+      {
+        "name": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/"
+      },
+      {
+        "name": "Dev.to",
+        "url": "https://dev.to/"
+      }
+    ]
+  },
+  {
+    "categoryName": "阅读资源",
+    "websiteDataList": [
+      {
+        "name": "笔趣阁",
+        "url": "https://www.mayi93.com/"
+      },
+      {
+        "name": "熊猫搜书",
+        "url": "https://xmsoushu.com/#/"
+      },
+      {
+        "name": "番茄小说",
+        "url": "https://fanqienovel.com/"
+      },
+      {
+        "name": "多看阅读",
+        "url": "https://www.duokan.com/"
+      },
+      {
+        "name": "豆瓣阅读",
+        "url": "https://read.douban.com/"
+      },
+      {
+        "name": "阅文集团",
+        "url": "https://www.yuewen.com/"
+      },
+      {
+        "name": "起点中文网",
+        "url": "https://www.qidian.com/"
+      },
+      {
+        "name": "纵横中文网",
+        "url": "https://www.zongheng.com/"
+      },
+      {
+        "name": "新华书店",
+        "url": "http://www.xhbd.com/"
+      },
+      {
+        "name": "Apple Books",
+        "url": "https://books.apple.com/"
+      }
+    ]
   }
 ]
