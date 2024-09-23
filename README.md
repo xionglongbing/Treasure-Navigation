@@ -52,7 +52,6 @@ Treasure Navigation 是一个高度自定义的导航页面，旨在帮助用户
 
 ### API
 
-- [小歪 API](https://api.ixiaowai.cn/)
 - [缙哥哥 API](https://www.dujin.org/3618.html)
 - [Hitokoto 一言](https://hitokoto.cn/)
 
