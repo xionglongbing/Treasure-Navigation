@@ -303,9 +303,7 @@ const customCoverUrl = ref('');
 // 壁纸类别
 const backgroundTypeArr = [
   { name: '本地默认', tip: '默认壁纸，随机更换' },
-  { name: '每日必应', tip: '必应每日一图，每天更新' },
-  { name: '随机风景', tip: '随机风景图，随机更换' },
-  { name: '随机动漫', tip: '随机二次元图，随机更换' }
+  { name: '每日必应', tip: '必应每日一图，每天更新' }
 ];
 
 // 主题类别

@@ -45,16 +45,10 @@ const setBgUrl = () => {
       break;
     }
     case 2:
-      bgUrl.value = 'https://api.aixiaowai.cn/gqapi/gqapi.php';
-      break;
-    case 3:
-      bgUrl.value = 'https://api.aixiaowai.cn/api/api.php';
-      break;
-    case 4:
-      bgUrl.value = backgroundCustom;
+      bgUrl.value = set.backgroundCustom;
       break;
     default:
-      bgUrl.value = `./background/bg${bgRandom}.jpg`;
+      bgUrl.value = `/background/bg${bgRandom}.jpg`;
       break;
   }
 };
