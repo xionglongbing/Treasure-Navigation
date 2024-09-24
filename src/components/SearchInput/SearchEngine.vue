@@ -7,8 +7,8 @@
           <n-grid-item
             v-for="(item, key) in defaultEngine"
             :key="key"
-            :class="['engine', item.url === set.searchEngine ? 'choose' : null]"
-            @click="changeSearchEngine(item.url)"
+            :class="['engine', key === set.searchEngine ? 'choose' : null]"
+            @click="changeSearchEngine(key as string)"
           >
             <SvgIcon :iconName="`icon-${key}`" />
             <span class="name">{{ item.name }}</span>
