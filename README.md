@@ -19,9 +19,14 @@ Treasure Navigation 是一个高度自定义的导航页面，旨在帮助用户
 
 ## 图片演示
 
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image.png)
+1. 搜索内容
+   ![alt text](搜索.gif)
+2. 自由拖拽
+   ![alt text](自由拖拽.gif)
+3. 添加导航
+   ![alt text](添加导航.gif)
+4. 删除导航
+   ![alt text](删除导航.gif)
 
 ## 在线演示
 
