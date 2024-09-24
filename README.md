@@ -30,7 +30,7 @@
 
 ## 🌐 在线演示
 
-- 快来体验我们的 [寻宝导航](https://xionglongbing.github.io/wonderfulJourney/)，一探究竟吧！
+- 快来体验我们的 [寻宝导航](https://xionglongbing.github.io/Treasure-Navigation/)，一探究竟吧！
 
 ## 💻 技术栈
 
