@@ -100,17 +100,7 @@
     @handleBatchAddShortcut="handleBatchAddShortcut"
     @clearSelectedShortcut="clearSelectedShortcut"
   />
-  <!-- <n-dropdown
-    placement="bottom-start"
-    trigger="manual"
-    size="large"
-    :x="contextMenuX"
-    :y="contextMenuY"
-    :options="contextMenuOptions"
-    :show="isContextMenuVisible"
-    @clickoutside="closeContextMenu"
-    @select="handleContextMenuSelect"
-  /> -->
+
   <ContextMenu
     ref="contextMenu"
     size="large"
