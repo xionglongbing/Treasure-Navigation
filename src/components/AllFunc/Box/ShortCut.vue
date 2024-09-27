@@ -78,12 +78,12 @@
         </VueDraggable>
         <div class="footer__btn-group">
           <div class="footer__btn-group--left">
-            <div>
-              <SvgIcon iconName="icon-xiazai" @click="downloadHtmlFile" />
+            <div class="footer__btn" @click="downloadHtmlFile">
+              <SvgIcon iconName="icon-xiazai" />
               <span class="name">下载</span>
             </div>
-            <!-- <div>
-              <SvgIcon iconName="icon-shangchuan" @click="uploadHtmlFile" />
+            <!-- <div  class="footer__btn" @click="uploadHtmlFile" >
+              <SvgIcon iconName="icon-shangchuan"/>
               <span class="name">上传</span>
             </div> -->
           </div>
@@ -514,7 +514,7 @@ function openWebsite(url: string) {
     .footer__btn-group--left {
       grid-column: 1 / 2;
       display: flex;
-      div {
+      .footer__btn {
         border-radius: 8px;
         width: 80px;
         height: 40px;
