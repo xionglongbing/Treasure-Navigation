@@ -76,9 +76,21 @@
           </n-collapse>
           <!-- </template> -->
         </VueDraggable>
-        <div class="shortcut__add" @contextmenu.prevent @click="openAddShortcutModal">
-          <SvgIcon iconName="icon-add" />
-          <span class="name">添加导航</span>
+        <div class="footer__btn-group">
+          <div class="footer__btn-group--left">
+            <div>
+              <SvgIcon iconName="icon-xiazai" @click="downloadHtmlFile" />
+              <span class="name">下载</span>
+            </div>
+            <!-- <div>
+              <SvgIcon iconName="icon-shangchuan" @click="uploadHtmlFile" />
+              <span class="name">上传</span>
+            </div> -->
+          </div>
+          <div class="shortcut__add" @click="openAddShortcutModal">
+            <SvgIcon iconName="icon-add" />
+            <span class="name">添加导航</span>
+          </div>
         </div>
       </n-scrollbar>
     </div>
@@ -100,6 +112,8 @@
     @handleBatchAddShortcut="handleBatchAddShortcut"
     @clearSelectedShortcut="clearSelectedShortcut"
   />
+
+  <!-- <UpLoadModal v-model="upLoadModalVisible" @clearSelectedShortcut="clearSelectedShortcut" /> -->
 
   <ContextMenu
     ref="contextMenu"
@@ -227,6 +241,72 @@ function messageTip(messageInfo: MessageInfo) {
 // 添加导航弹窗相关数据
 const isAddShortcutModalVisible = ref(false);
 const isEditMode = ref(false);
+
+// 下载导航文件
+function downloadHtmlFile() {
+  const htmlStr: string = `
+    <!DOCTYPE html>
+    <html lang="en">
+
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>导航集合</title>
+      </head>
+
+      <body>
+      </body>
+      <script id="json-script" type="application/json">
+        ${JSON.stringify(site.categoryDataList)}
+      <\/script>
+      <script>
+        const jsonDom = document.querySelector("#json-script");
+        const jsonStr = jsonDom.innerText;
+        const jsonData = JSON.parse(jsonStr);
+        console.log('jsonData', jsonData);
+        const bodyDom = document.querySelector("body");
+        function getWebsiteDataListDom(websiteDataList) {
+          let htmlStr = "";
+          websiteDataList.forEach(item => {
+            htmlStr +=
+              \`
+                <dd><a href="\${item.url}" target="_blank">\${item.name}</a></dd>
+              \`
+          })
+          return htmlStr;
+        }
+        jsonData.forEach(item => {
+          bodyDom.innerHTML +=
+            \`
+              <dl>
+                <dt>
+                  <h2>\${item.categoryName}</h2>
+                </dt>
+                \${getWebsiteDataListDom(item.websiteDataList)}
+              </dl>
+            \`
+        });
+      <\/script>
+    <\/html>
+  `;
+  const htmlStrBolo = new Blob([htmlStr], { type: 'text/html' });
+  console.log('htmlStrBolo', htmlStrBolo);
+  const htmlStrUrl = URL.createObjectURL(htmlStrBolo);
+  console.log('htmlStr', htmlStr);
+  console.log('htmlStrUrl', htmlStrUrl);
+  const aLink = document.createElement('a');
+  aLink.href = htmlStrUrl;
+  aLink.download = '导航下载文件.html';
+  aLink.click();
+  URL.revokeObjectURL(htmlStrUrl);
+}
+
+//
+// const upLoadModalVisible = false;
+// // 上传文件
+// function uploadHtmlFile() {
+
+// }
 
 // 打开添加导航弹窗
 function openAddShortcutModal() {
@@ -428,15 +508,35 @@ function openWebsite(url: string) {
       }
     }
   }
-  .shortcut__add {
-    width: 240px;
-    height: 40px;
-    margin: 15px auto;
-    border-radius: 8px;
-    background-color: var(--main-background-light-color);
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
+  .footer__btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    .footer__btn-group--left {
+      grid-column: 1 / 2;
+      display: flex;
+      div {
+        border-radius: 8px;
+        width: 80px;
+        height: 40px;
+        background-color: var(--main-background-light-color);
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+      }
+      div + div {
+        margin-left: 10px;
+      }
+    }
+    .shortcut__add {
+      width: 240px;
+      height: 40px;
+      margin: 15px auto;
+      border-radius: 8px;
+      background-color: var(--main-background-light-color);
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
+    }
   }
   .icon_span--style {
     display: flex;

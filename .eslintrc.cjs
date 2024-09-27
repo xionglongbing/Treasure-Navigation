@@ -14,7 +14,8 @@ module.exports = {
   },
   rules: {
     'vue/multi-word-component-names': 'off',
-    'vue/require-v-for-key': 'off'
+    'vue/require-v-for-key': 'off',
+    'no-useless-escape': 'off'
   },
   env: {
     node: true
