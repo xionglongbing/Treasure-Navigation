@@ -23,6 +23,9 @@ const useSiteDataStore = defineStore(
     const categoryNameList = computed(() =>
       state.categoryDataList.map((item) => item.categoryName)
     );
+    function setCategoryDataList(newCategoryDataList: CategoryData[]) {
+      state.categoryDataList = newCategoryDataList;
+    }
     function findCategoryData(categoryName: string) {
       const categoryData = state.categoryDataList.find((cat) => cat.categoryName === categoryName);
       return categoryData;
@@ -153,7 +156,8 @@ const useSiteDataStore = defineStore(
       findWebsiteData,
       categoryNameList,
       batchAddCount,
-      changebatchAddCount
+      changebatchAddCount,
+      setCategoryDataList
     };
   },
   {

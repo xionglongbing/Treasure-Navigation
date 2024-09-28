@@ -82,10 +82,11 @@
               <SvgIcon iconName="icon-xiazai" />
               <span class="name">下载</span>
             </div>
-            <!-- <div  class="footer__btn" @click="uploadHtmlFile" >
-              <SvgIcon iconName="icon-shangchuan"/>
+            <div class="footer__btn" @click="clickFileDom">
+              <input type="file" name="上传" id="shortCutUploadInput" />
+              <SvgIcon iconName="icon-shangchuan" />
               <span class="name">上传</span>
-            </div> -->
+            </div>
           </div>
           <div class="shortcut__add" @click="openAddShortcutModal">
             <SvgIcon iconName="icon-add" />
@@ -159,7 +160,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, h } from 'vue';
+import { ref, h, onMounted, onBeforeUnmount } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   NButton,
@@ -242,6 +243,7 @@ function messageTip(messageInfo: MessageInfo) {
 const isAddShortcutModalVisible = ref(false);
 const isEditMode = ref(false);
 
+const scriptDataId: string = 'json-script';
 // 下载导航文件
 function downloadHtmlFile() {
   const htmlStr: string = `
@@ -256,11 +258,11 @@ function downloadHtmlFile() {
 
       <body>
       </body>
-      <script id="json-script" type="application/json">
+      <script id="${scriptDataId}" type="application/json">
         ${JSON.stringify(site.categoryDataList)}
       <\/script>
       <script>
-        const jsonDom = document.querySelector("#json-script");
+        const jsonDom = document.querySelector("#${scriptDataId}");
         const jsonStr = jsonDom.innerText;
         const jsonData = JSON.parse(jsonStr);
         console.log('jsonData', jsonData);
@@ -301,12 +303,42 @@ function downloadHtmlFile() {
   URL.revokeObjectURL(htmlStrUrl);
 }
 
-//
-// const upLoadModalVisible = false;
-// // 上传文件
-// function uploadHtmlFile() {
+onMounted(() => {
+  document.querySelector('#shortCutUploadInput')?.addEventListener('change', uploadHtmlFile);
+});
 
-// }
+onBeforeUnmount(() => {
+  document.querySelector('#shortCutUploadInput')?.removeEventListener('change', uploadHtmlFile);
+});
+
+function uploadHtmlFile(this: HTMLInputElement, event: Event) {
+  if (this.files) {
+    const fileReader = new FileReader();
+    fileReader.readAsText(this.files![0] as Blob);
+    const reg = /id="json-script".*?>(.*?)<\/script>/s;
+    fileReader.onload = function (res) {
+      if (typeof fileReader.result === 'string') {
+        console.log('res', res, fileReader.result);
+        const dataStr = fileReader.result.match(reg)?.[1];
+        console.log('dataStr', dataStr);
+        if (dataStr) {
+          const newCategoryDataList = JSON.parse(dataStr);
+          console.log(newCategoryDataList);
+          site.setCategoryDataList(newCategoryDataList);
+        }
+      }
+    };
+  }
+}
+// 上传文件
+function clickFileDom() {
+  const fileDom: HTMLInputElement | null = document.querySelector('#shortCutUploadInput');
+  if (fileDom) {
+    fileDom.click();
+  } else {
+    console.warn('元素不存在');
+  }
+}
 
 // 打开添加导航弹窗
 function openAddShortcutModal() {
@@ -511,6 +543,7 @@ function openWebsite(url: string) {
   .footer__btn-group {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    padding: 15px 0;
     .footer__btn-group--left {
       grid-column: 1 / 2;
       display: flex;
@@ -522,6 +555,9 @@ function openWebsite(url: string) {
         line-height: 40px;
         text-align: center;
         cursor: pointer;
+        #shortCutUploadInput {
+          display: none;
+        }
       }
       div + div {
         margin-left: 10px;
@@ -530,7 +566,6 @@ function openWebsite(url: string) {
     .shortcut__add {
       width: 240px;
       height: 40px;
-      margin: 15px auto;
       border-radius: 8px;
       background-color: var(--main-background-light-color);
       line-height: 40px;
