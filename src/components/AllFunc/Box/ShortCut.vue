@@ -591,6 +591,7 @@ function openWebsite(url: string) {
     .shortcut__add {
       width: 240px;
       height: 40px;
+      justify-self: center;
       border-radius: 8px;
       background-color: var(--main-background-light-color);
       line-height: 40px;
