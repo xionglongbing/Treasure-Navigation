@@ -1,16 +1,29 @@
 <template>
   <div class="all-controls">
-    <div
-      class="change-status"
-      :title="status.siteStatus === 'menu' ? '收起' : '菜单'"
-      @click.stop="status.setSiteStatus(status.siteStatus === 'menu' ? 'normal' : 'menu')"
-    >
-      <Transition name="fade" mode="out-in">
-        <SvgIcon
-          :iconName="`icon-${status.siteStatus === 'menu' ? 'guanbi' : 'caidan'}`"
-          :key="status.siteStatus === 'menu' ? 'guanbi' : 'caidan'"
-        />
-      </Transition>
+    <div class="leftIconGroup">
+      <div
+        class="change-status"
+        :title="status.siteStatus === 'menu' ? '收起' : '菜单'"
+        @click.stop="status.setSiteStatus(status.siteStatus === 'menu' ? 'normal' : 'menu')"
+      >
+        <Transition name="fade" mode="out-in">
+          <SvgIcon
+            :iconName="`icon-${status.siteStatus === 'menu' ? 'guanbi' : 'caidan'}`"
+            :key="status.siteStatus === 'menu' ? 'guanbi' : 'caidan'"
+          />
+        </Transition>
+      </div>
+      <div class="change-status" title="github">
+        <a
+          href="https://github.com/xionglongbing/Treasure-Navigation"
+          style="margin-bottom: -7px"
+          target="blank"
+        >
+          <Transition name="fade" mode="out-in">
+            <SvgIcon iconName="icon-github1" />
+          </Transition>
+        </a>
+      </div>
     </div>
     <div
       class="change-status"
@@ -50,6 +63,11 @@ let isOpemMenu = reactive<Boolean>(false);
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  .leftIconGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+  }
   .change-status {
     cursor: pointer;
     display: flex;
