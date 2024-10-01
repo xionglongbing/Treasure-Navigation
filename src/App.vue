@@ -16,13 +16,8 @@
       >
         <MenuList />
 
-        <WeatherTime />
         <SearchInp @contextmenu.stop />
         <AllFunc @contextmenu.stop />
-        <Footer />
-        <!-- 状态切换 -->
-        <!-- <Transition name="fade"> -->
-        <!-- </Transition> -->
       </main>
       <div v-else id="loading">
         <img src="/icon/logo.png" alt="logo" class="logo" />
@@ -36,16 +31,14 @@
 defineOptions({
   name: 'App'
 });
-import { Edit } from '@element-plus/icons-vue'; // 引入 Edit 这个 svg组件
 import { onMounted, nextTick, watch, ref } from 'vue';
 import { statusStore, setStore } from '@/stores';
 import { getGreeting } from '@/utils/timeTools';
 import Provider from '@/components/Provider.vue';
 import Cover from '@/components/Cover.vue';
-import WeatherTime from '@/components/WeatherTime.vue';
 import SearchInp from '@/components/SearchInput/SearchInp.vue';
 import AllFunc from '@/components/AllFunc/index.vue';
-import Footer from '@/components/Footer.vue';
+import ShortCut from '@/components/AllFunc/Box/ShortCut.vue';
 import MenuList from '@/components/Layout/Menu.vue';
 
 const set = setStore();
