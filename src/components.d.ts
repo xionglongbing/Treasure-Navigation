@@ -8,7 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AddShortcut: typeof import('./components/AllFunc/Box/AddShortcut.vue')['default']
-    AllBox: typeof import('./components/AllFunc/AllBox.vue')['default']
     AllFunc: typeof import('./components/AllFunc/index.vue')['default']
     AllSet: typeof import('./components/AllFunc/AllSet.vue')['default']
     Background: typeof import('./components/Background/index.vue')['default']
@@ -23,13 +22,14 @@ declare module 'vue' {
     IconTooling: typeof import('./components/icons/IconTooling.vue')['default']
     Loading: typeof import('./components/Loading/index.vue')['default']
     Menu: typeof import('./components/Layout/Menu.vue')['default']
-    Nav: typeof import('./components/AllFunc/Nav.vue')['default']
     Provider: typeof import('./components/Provider.vue')['default']
     SearchEngine: typeof import('./components/SearchInput/SearchEngine.vue')['default']
     SearchInp: typeof import('./components/SearchInput/SearchInp.vue')['default']
     ShortCut: typeof import('./components/AllFunc/Box/ShortCut.vue')['default']
+    ShortCutLayout: typeof import('./components/AllFunc/Box/ShortCutLayout.vue')['default']
     Suggestions: typeof import('./components/SearchInput/Suggestions.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon.vue')['default']
+    ToolBox: typeof import('./components/AllFunc/ToolBox.vue')['default']
     WeatherTime: typeof import('./components/WeatherTime.vue')['default']
   }
 }

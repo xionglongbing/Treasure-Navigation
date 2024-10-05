@@ -10,7 +10,7 @@
     "
   >
     <Transition name="fade" mode="out-in">
-      <Nav v-if="status.siteStatus === 'menu'" />
+      <ToolBox v-if="status.siteStatus === 'menu'" />
       <AllSet v-else-if="status.siteStatus === 'set'" />
     </Transition>
   </div>
@@ -18,7 +18,7 @@
 
 <script setup>
 import { statusStore } from '@/stores';
-import Nav from '@/components/AllFunc/Nav.vue';
+import ToolBox from '@/components/AllFunc/ToolBox.vue';
 import AllSet from '@/components/AllFunc/AllSet.vue';
 
 const status = statusStore();
