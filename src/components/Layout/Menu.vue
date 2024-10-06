@@ -54,15 +54,12 @@ let isOpemMenu = reactive<Boolean>(false);
 </script>
 <style lang="scss">
 .all-controls {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  padding: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  width: 100%;
   .leftIconGroup {
     display: grid;
     grid-template-columns: 1fr 1fr;

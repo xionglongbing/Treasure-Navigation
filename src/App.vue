@@ -2,28 +2,31 @@
   <Provider>
     <!-- 壁纸 -->
     <Cover @loadComplete="loadComplete" />
-    <!-- 主界面 -->
-    <Transition name="fade" mode="out-in">
-      <main
-        v-if="status.imgLoadStatus"
-        tabindex="0"
-        id="main"
-        :class="`main-${status.siteStatus}`"
-        :style="{ pointerEvents: mainClickable ? 'auto' : 'none' }"
-        @click="status.setSiteStatus('normal')"
-        @contextmenu="mainContextmenu"
-        @keydown="mainPressKeyboard"
-      >
+    <div class="page-main__layout" id="main-page">
+      <header class="page-header">
         <MenuList />
-
         <SearchInp @contextmenu.stop />
-        <AllFunc @contextmenu.stop />
-      </main>
-      <div v-else id="loading">
-        <img src="/icon/logo.png" alt="logo" class="logo" />
-        <span class="tip">开发中</span>
-      </div>
-    </Transition>
+      </header>
+      <Transition name="fade" mode="out-in">
+        <!-- 主界面 -->
+        <main
+          class="layout-main"
+          v-if="status.imgLoadStatus"
+          :class="`main-${status.siteStatus}`"
+          :style="{ pointerEvents: mainClickable ? 'auto' : 'none' }"
+          @click="status.setSiteStatus('normal')"
+          @contextmenu="mainContextmenu"
+          @keydown="mainPressKeyboard"
+        >
+          <!-- <ShortCut /> -->
+          <AllFunc @contextmenu.stop />
+        </main>
+        <div v-else id="loading">
+          <img src="/icon/logo.png" alt="logo" class="logo" />
+          <span class="tip">开发中</span>
+        </div>
+      </Transition>
+    </div>
   </Provider>
 </template>
 
@@ -97,19 +100,27 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-#main,
 #loading {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  &.main-normal,
-  &.main-focus {
+}
+.page-main__layout {
+  width: 100%;
+  height: 100%;
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    padding: 10px;
+  }
+  .layout-main {
+    // flex: 1;
+  }
+  .main-normal,
+  .main-focus {
     .main-box {
       opacity: 0;
       margin-top: 0;
@@ -117,8 +128,8 @@ onMounted(() => {
       pointer-events: none;
     }
   }
-  &.main-box,
-  &.main-set {
+  .main-box,
+  .main-set {
     .main-box {
       opacity: 1;
       margin-top: 20vh;
@@ -133,39 +144,6 @@ onMounted(() => {
         opacity: 0;
         width: 0;
         visibility: hidden;
-      }
-    }
-  }
-  .all-controls {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    .change-status {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      padding: 8px;
-      border-radius: 8px;
-      color: var(--main-text-color);
-      z-index: 1;
-      transition:
-        opacity 0.3s,
-        background-color 0.3s,
-        transform 0.3s;
-      &:hover {
-        backdrop-filter: blur(20px);
-        background-color: var(--main-background-light-color);
-      }
-      &:active {
-        transform: scale(0.95);
       }
     }
   }

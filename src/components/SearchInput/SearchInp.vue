@@ -177,7 +177,7 @@ const changeEngine = () => {
 
 <style lang="scss" scoped>
 .search-input {
-  position: absolute;
+  // position: absolute;
   display: flex;
   flex-direction: row;
   align-items: center;
