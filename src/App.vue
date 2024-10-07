@@ -4,8 +4,10 @@
     <Cover @loadComplete="loadComplete" />
     <div class="page-main__layout" id="main-page">
       <header class="page-header">
-        <MenuList />
-        <SearchInp @contextmenu.stop />
+        <div class="header--fix">
+          <MenuList />
+          <SearchInp @contextmenu.stop />
+        </div>
       </header>
       <Transition name="fade" mode="out-in">
         <!-- 主界面 -->
@@ -108,16 +110,19 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   .page-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
     width: 100%;
-    top: 0;
+    height: 110px;
     padding: 10px;
-  }
-  .layout-main {
-    // flex: 1;
+    backdrop-filter: blur(80px); // 可以成为fixed的基准父元素
+    .header--fix {
+      position: fixed;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
   }
   .main-normal,
   .main-focus {
