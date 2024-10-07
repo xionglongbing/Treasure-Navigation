@@ -1,5 +1,5 @@
 <template>
-  <div :class="status.siteStatus !== 'normal' ? 'cover focus' : 'cover'">
+  <div :class="['cover', status.siteStatus !== 'normal' ? 'focus' : '']">
     <img
       v-show="status.imgLoadStatus"
       class="background"
@@ -81,7 +81,6 @@ onMounted(() => {
 .cover {
   width: 100%;
   height: 100%;
-  position: relative;
   background-color: var(--body-background-color);
   &.focus {
     .background {
