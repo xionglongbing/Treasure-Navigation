@@ -14,14 +14,18 @@
         <main
           class="layout-main"
           v-if="status.imgLoadStatus"
-          :class="`main-${status.siteStatus}`"
           :style="{ pointerEvents: mainClickable ? 'auto' : 'none' }"
-          @click="status.setSiteStatus('normal')"
+          @click="status.setMenuStatus('normal')"
           @contextmenu="mainContextmenu"
           @keydown="mainPressKeyboard"
         >
           <!-- <ShortCut /> -->
-          <AllFunc @contextmenu.stop />
+          <MainColorModal v-show="!!status.menuStatus" @contextmenu.stop>
+            <!-- <Transition name="fade" mode="out-in"> -->
+            <ToolBox v-show="status.menuStatus === 'menu'" />
+            <AllSet v-show="status.menuStatus === 'set'" />
+            <!-- </Transition> -->
+          </MainColorModal>
         </main>
         <div v-else id="loading">
           <img src="/icon/logo.png" alt="logo" class="logo" />
@@ -42,8 +46,10 @@ import { getGreeting } from '@/utils/timeTools';
 import Provider from '@/components/Provider.vue';
 import Cover from '@/components/Cover.vue';
 import SearchInp from '@/components/SearchInput/SearchInp.vue';
-import AllFunc from '@/components/AllFunc/index.vue';
-import ShortCut from '@/components/AllFunc/Box/ShortCut.vue';
+import MainColorModal from '@/components/MainColorModal/index.vue';
+import ToolBox from '@/components/AllFunc/ToolBox.vue';
+import AllSet from '@/components/AllFunc/AllSet.vue';
+// import ShortCut from '@/components/AllFunc/Box/ShortCut.vue';
 import MenuList from '@/components/Layout/Menu.vue';
 
 const set = setStore();
@@ -57,7 +63,7 @@ const welcomeText: string = import.meta.env.VITE_WELCOME_TEXT ?? '欢迎访问�
 // 鼠标右键
 const mainContextmenu = (event: MouseEvent) => {
   event.preventDefault();
-  status.setSiteStatus('set');
+  status.setMenuStatus('set');
 };
 
 // 加载完成事件
@@ -78,7 +84,7 @@ const mainPressKeyboard = (event: KeyboardEvent) => {
   if (keyCode === 13) {
     // focus 元素
     const mainInput = document.getElementById('main-input') as HTMLInputElement;
-    status.setSiteStatus('focus');
+    // status.setMenuStatus('focus');
     mainInput?.focus();
   }
 };
@@ -122,34 +128,6 @@ onMounted(() => {
       align-items: center;
       width: 100%;
       height: 100%;
-    }
-  }
-  .main-normal,
-  .main-focus {
-    .main-box {
-      opacity: 0;
-      margin-top: 0;
-      transform: scale(0.35);
-      pointer-events: none;
-    }
-  }
-  .main-box,
-  .main-set {
-    .main-box {
-      opacity: 1;
-      margin-top: 20vh;
-      transform: scale(1);
-      visibility: visible;
-      @media (max-width: 478px) {
-        margin-top: 22vh;
-      }
-    }
-    .search-input {
-      :deep(.all) {
-        opacity: 0;
-        width: 0;
-        visibility: hidden;
-      }
     }
   }
 }

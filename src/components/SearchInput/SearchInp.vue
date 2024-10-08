@@ -4,13 +4,13 @@
     :class="[
       'search-input',
       set.smallInput ? 'small' : null,
-      status.siteStatus === 'focus' ? 'focus' : null
+      status.menuStatus === 'focus' ? 'focus' : null
     ]"
     @click.stop
   >
     <!-- 搜索框遮罩 -->
-    <div
-      v-if="status.siteStatus === 'focus'"
+    <!-- <div
+      v-if="status.menuStatus === 'focus'"
       class="mask"
       @click="closeSearchInput(false)"
       @contextmenu.stop="
@@ -18,7 +18,7 @@
           event.preventDefault();
         }
       "
-    />
+    /> -->
     <!-- 主搜索框 -->
     <div class="all" ref="searchAllRef" @animationend="inputAnimationEnd">
       <div class="engine" title="切换搜索引擎" @click="changeEngine">
@@ -41,7 +41,6 @@
         autocomplete="false"
         :placeholder="inputTip"
         v-model="status.searchInputValue"
-        @focus="status.setSiteStatus('focus')"
         @click.stop="status.setEngineChangeStatus(false)"
         @keydown.stop="pressKeyboard"
       />
@@ -57,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { statusStore, setStore } from '@/stores';
 import SearchEngine from '@/components/SearchInput/SearchEngine.vue';
 import Suggestions from '@/components/SearchInput/Suggestions.vue';
@@ -68,6 +67,22 @@ const defaultEngine: DefaultEngine = defaultEngineValue;
 // 获取store实例
 const set = setStore();
 const status = statusStore();
+
+//input滚动时的动画
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+onMounted(() => {
+  gsap.to('.search-input', {
+    duration: 1,
+    scrollTrigger: {
+      start: 'top top',
+      trigger: '.search-input'
+    },
+    y: -45,
+    updated() {}
+  });
+});
 
 // 搜索框配置
 const inputTip = import.meta.env.VITE_INPUT_TIP ?? '想要搜点什么';
@@ -82,10 +97,10 @@ const suggestionsRef = ref<InstanceType<typeof Suggestions> | null>(null);
 // 关闭搜索框
 const closeSearchInput = (check = false) => {
   if (check && !set.autoInputBlur) {
-    status.setSiteStatus('focus');
+    // status.setMenuStatus('focus');
   } else {
     status.setSearchInputValue('');
-    status.setSiteStatus('normal');
+    // status.setMenuStatus('normal');
     searchInputRef.value?.blur();
   }
   status.setEngineChangeStatus(false);
@@ -142,10 +157,10 @@ const toSearch = (val: string, type = 1) => {
     }
     closeSearchInput(true);
   } else {
-    if (status.siteStatus === 'focus') {
-      window.$message.info('请输入搜索内容', { duration: 1500 });
-    }
-    status.setSiteStatus('focus');
+    // if (status.menuStatus === 'focus') {
+    //   window.$message.info('请输入搜索内容', { duration: 1500 });
+    // }
+    // status.setMenuStatus('focus');
     searchInputRef.value?.focus();
   }
 };
@@ -155,7 +170,7 @@ const inputAnimationEnd = () => {
   console.log('搜索框动画结束');
   // 自动 focus
   if (set.autoFocus) {
-    status.setSiteStatus('focus');
+    // status.setMenuStatus('focus');
     searchInputRef.value?.focus();
   }
 };
@@ -170,7 +185,7 @@ const pressKeyboard = (event: KeyboardEvent) => {
 
 // 更换搜索引擎
 const changeEngine = () => {
-  status.setSiteStatus('focus', false);
+  // status.setMenuStatus('focus', false);
   status.setEngineChangeStatus(!status.engineChangeStatus);
 };
 </script>

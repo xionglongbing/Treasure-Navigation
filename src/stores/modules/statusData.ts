@@ -9,7 +9,7 @@ const useStatusDataStore = defineStore(
     // 定义状态
     const state = reactive<StatusDataState>({
       imgLoadStatus: false,
-      siteStatus: 'normal',
+      menuStatus: '',
       engineChangeStatus: false,
       searchInputValue: ''
     });
@@ -20,8 +20,8 @@ const useStatusDataStore = defineStore(
       state.imgLoadStatus = value;
     };
 
-    const setSiteStatus = (value: StatusDataState['siteStatus'], alsoChange = true) => {
-      state.siteStatus = value;
+    const setMenuStatus = (value: StatusDataState['menuStatus'], alsoChange = true) => {
+      state.menuStatus = value;
       if (value !== 'focus') state.searchInputValue = '';
       if (alsoChange) state.engineChangeStatus = false;
     };
@@ -38,7 +38,7 @@ const useStatusDataStore = defineStore(
     return {
       ...toRefs(state),
       setImgLoadStatus,
-      setSiteStatus,
+      setMenuStatus,
       setEngineChangeStatus,
       setSearchInputValue
     };

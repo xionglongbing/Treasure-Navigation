@@ -73,7 +73,6 @@
               secondary
               @click="
                 () => {
-                  status.setSiteStatus('focus');
                   status.setEngineChangeStatus(true);
                 }
               "

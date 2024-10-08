@@ -3,13 +3,13 @@
     <div class="leftIconGroup">
       <div
         class="change-status"
-        :title="status.siteStatus === 'menu' ? '收起' : '菜单'"
-        @click.stop="status.setSiteStatus(status.siteStatus === 'menu' ? 'normal' : 'menu')"
+        :title="status.menuStatus === 'menu' ? '收起' : '菜单'"
+        @click.stop="status.setMenuStatus(status.menuStatus === 'menu' ? '' : 'menu')"
       >
         <Transition name="fade" mode="out-in">
           <SvgIcon
-            :iconName="`icon-${status.siteStatus === 'menu' ? 'guanbi' : 'caidan'}`"
-            :key="status.siteStatus === 'menu' ? 'guanbi' : 'caidan'"
+            :iconName="`icon-${status.menuStatus === 'menu' ? 'guanbi' : 'caidan'}`"
+            :key="status.menuStatus === 'menu' ? 'guanbi' : 'caidan'"
           />
         </Transition>
       </div>
@@ -27,13 +27,13 @@
     </div>
     <div
       class="change-status"
-      :title="status.siteStatus === 'set' ? '首页' : '设置'"
-      @click.stop="status.setSiteStatus(status.siteStatus === 'set' ? 'normal' : 'set')"
+      :title="status.menuStatus === 'set' ? '首页' : '设置'"
+      @click.stop="status.setMenuStatus(status.menuStatus === 'set' ? '' : 'set')"
     >
       <Transition name="fade" mode="out-in">
         <SvgIcon
-          :iconName="`icon-${status.siteStatus === 'set' ? 'home' : 'setting'}`"
-          :key="status.siteStatus === 'set' ? 'home' : 'setting'"
+          :iconName="`icon-${status.menuStatus === 'set' ? 'home' : 'setting'}`"
+          :key="status.menuStatus === 'set' ? 'home' : 'setting'"
         />
       </Transition>
     </div>

@@ -33,7 +33,7 @@ export interface SiteDataState {
 // 定义statusData状态类型
 export interface StatusDataState {
   imgLoadStatus: boolean;
-  siteStatus: 'normal' | 'focus' | 'menu' | 'set';
+  menuStatus: '' | 'normal' | 'focus' | 'menu' | 'set';
   engineChangeStatus: boolean;
   searchInputValue: string;
 }

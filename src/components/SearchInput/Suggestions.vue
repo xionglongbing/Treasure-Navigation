@@ -5,7 +5,7 @@
       v-if="
         set.showSuggestions &&
         searchKeyword !== null &&
-        status.siteStatus === 'focus' &&
+        status.menuStatus === 'focus' &&
         !status.engineChangeStatus
       "
       class="suggestions"
