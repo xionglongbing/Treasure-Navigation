@@ -26,6 +26,8 @@ declare module 'vue' {
     Provider: typeof import('./components/Provider.vue')['default']
     SearchEngine: typeof import('./components/SearchInput/SearchEngine.vue')['default']
     SearchInp: typeof import('./components/SearchInput/SearchInp.vue')['default']
+    ShorcutEditCategoryName: typeof import('./components/AllFunc/Box/ShorcutEditCategoryName.vue')['default']
+    ShortCu: typeof import('./components/AllFunc/Box/ShortCu.vue')['default']
     ShortCut: typeof import('./components/AllFunc/Box/ShortCut.vue')['default']
     ShortCutLayout: typeof import('./components/AllFunc/Box/ShortCutLayout.vue')['default']
     Suggestions: typeof import('./components/SearchInput/Suggestions.vue')['default']

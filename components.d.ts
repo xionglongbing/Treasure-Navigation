@@ -29,6 +29,7 @@ declare module 'vue' {
     SearchEngine: typeof import('./src/components/SearchInput/SearchEngine.vue')['default']
     SearchInp: typeof import('./src/components/SearchInput/SearchInp.vue')['default']
     ShortCut: typeof import('./src/components/AllFunc/Box/ShortCut.vue')['default']
+    ShortCutLayout: typeof import('./src/components/AllFunc/Box/ShortCutLayout.vue')['default']
     Suggestions: typeof import('./src/components/SearchInput/Suggestions.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
     WeatherTime: typeof import('./src/components/WeatherTime.vue')['default']
