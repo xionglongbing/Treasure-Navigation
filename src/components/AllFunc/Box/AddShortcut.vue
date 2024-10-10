@@ -84,11 +84,9 @@
 import { ref, computed } from 'vue';
 import { NButton, NForm, NFormItem, NInput, NSelect, NSpace, NModal } from 'naive-ui';
 import { ElMessage } from 'element-plus';
-import { storeToRefs } from 'pinia';
 import { siteStore } from '@/stores';
 import identifyInput from '@/utils/identifyInput';
 import type { WebsiteDataInfo, WebsiteData } from '@/stores/types/type';
-import { ChainOfResponsibility } from '@/utils/tool';
 
 // Props and emit setup
 const props = defineProps({
