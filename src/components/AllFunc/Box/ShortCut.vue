@@ -1,110 +1,92 @@
 <template>
-  <Transition name="fade" mode="out-in">
-    <div v-if="categoryDataList.length" class="shortcut__content box__padding--lr20">
-      <n-scrollbar>
-        <!-- <template v-for="categoryData in categoryDataList" :key="categoryData.categoryName"> -->
-        <VueDraggable :animation="150" v-model="categoryDataList">
-          <n-collapse
-            v-for="categoryData in categoryDataList"
-            :key="categoryData.categoryName"
-            :default-expanded-names="expandedCategoryNames"
-            :on-update:expanded-names="handleCollapseUpdate"
-            arrow-placement="right"
-            class="collapse-content"
-          >
-            <template #header-extra>
-              <!-- <SvgIcon
+  <n-scrollbar v-if="categoryDataList.length">
+    <VueDraggable :animation="150" v-model="categoryDataList">
+      <n-collapse
+        v-for="categoryData in categoryDataList"
+        :key="categoryData.categoryName"
+        :default-expanded-names="expandedCategoryNames"
+        :on-update:expanded-names="handleCollapseUpdate"
+        arrow-placement="right"
+        class="collapse-content"
+      >
+        <template #header-extra>
+          <!-- <SvgIcon
                 :iconName="
                   expandedCategoryNames.includes(categoryData.categoryName)
                     ? 'icon-a-jingyajingqiwasetianlabiaoqingxiaolian'
                     : 'icon-a-gangaliuhanbiaoqingxiaolian'
                 "
               /> -->
-              <span
-                class="icon_span--style icon--padding6"
-                @click.stop="handleOpenEditCategoryName(categoryData.categoryName)"
-              >
-                <el-icon style="vertical-align: middle">
-                  <Edit />
-                </el-icon>
-              </span>
-            </template>
-            <template #arrow>
-              <SvgIcon
-                iconName="icon-xianxingshuangzhixiangxiahuadong"
-                :iconStyle="{ transform: 'rotate(90deg)' }"
-              />
-            </template>
-            <n-collapse-item :name="categoryData.categoryName">
-              <template #header
-                ><div class="ccccc">{{ categoryData.categoryName }}</div></template
-              >
-              <VueDraggable
-                target=".shortcut-list"
-                :animation="150"
-                v-model="categoryData.websiteDataList"
-              >
-                <n-grid
-                  class="shortcut-list"
-                  responsive="screen"
-                  cols="3 s:4 m:5 l:6"
-                  :x-gap="10"
-                  :y-gap="10"
-                >
-                  <n-grid-item
-                    v-for="websiteData in categoryData.websiteDataList"
-                    :key="websiteData.url"
-                    class="shortcut-item"
-                    @contextmenu.stop="
-                      handleShortcutContextMenu($event, categoryData.categoryName, websiteData)
-                    "
-                    @click="openWebsite(websiteData.url)"
-                  >
-                    <span class="name">{{ websiteData.name }}</span>
-                    <span
-                      class="icon_span--style icon--padding10"
-                      @click.stop="confirmRemoveShortcut(categoryData.categoryName, websiteData)"
-                    >
-                      <el-icon style="vertical-align: middle">
-                        <CircleClose />
-                      </el-icon>
-                    </span>
-                  </n-grid-item>
-                </n-grid>
-              </VueDraggable>
-            </n-collapse-item>
-          </n-collapse>
-          <!-- </template> -->
-        </VueDraggable>
-      </n-scrollbar>
-      <div class="footer__btn-group">
-        <div class="footer__btn-group--left">
-          <div class="footer__btn" @click="downloadHtmlFile">
-            <SvgIcon iconName="icon-xiazai" />
-            <span class="name">下载</span>
-          </div>
-          <div class="footer__btn" @click="clickFileDom">
-            <input type="file" name="上传" id="shortCutUploadInput" />
-            <SvgIcon iconName="icon-shangchuan" />
-            <span class="name">上传</span>
-          </div>
-        </div>
-        <div class="shortcut__add" @click="openAddShortcutModal">
-          <SvgIcon iconName="icon-add" />
-          <span class="name">添加导航</span>
-        </div>
-      </div>
-    </div>
-    <div v-else class="not-shortcut">
-      <span class="tip">暂无导航，去添加吧</span>
-      <n-button strong secondary @click="openAddShortcutModal">
-        <template #icon>
-          <SvgIcon iconName="icon-add" />
+          <span
+            class="icon_span--style icon--padding6"
+            @click.stop="handleOpenEditCategoryName(categoryData.categoryName)"
+          >
+            <el-icon style="vertical-align: middle">
+              <Edit />
+            </el-icon>
+          </span>
         </template>
-        添加导航
-      </n-button>
-    </div>
-  </Transition>
+        <template #arrow>
+          <SvgIcon
+            iconName="icon-xianxingshuangzhixiangxiahuadong"
+            :iconStyle="{ transform: 'rotate(90deg)' }"
+          />
+        </template>
+        <n-collapse-item :name="categoryData.categoryName">
+          <template #header
+            ><div class="ccccc">{{ categoryData.categoryName }}</div></template
+          >
+          <VueDraggable
+            target=".shortcut-list"
+            :animation="150"
+            v-model="categoryData.websiteDataList"
+          >
+            <n-grid
+              class="shortcut-list"
+              responsive="screen"
+              cols="3 s:4 m:5 l:6"
+              :x-gap="10"
+              :y-gap="10"
+            >
+              <n-grid-item
+                v-for="websiteData in categoryData.websiteDataList"
+                :key="websiteData.url"
+                class="shortcut-item"
+                @contextmenu.stop="
+                  handleShortcutContextMenu($event, categoryData.categoryName, websiteData)
+                "
+                @click="openWebsite(websiteData.url)"
+              >
+                <span class="name">{{ websiteData.name }}</span>
+                <span
+                  class="icon_span--style icon--padding10"
+                  @click.stop="confirmRemoveShortcut(categoryData.categoryName, websiteData)"
+                >
+                  <el-icon style="vertical-align: middle">
+                    <CircleClose />
+                  </el-icon>
+                </span>
+              </n-grid-item>
+            </n-grid>
+          </VueDraggable>
+        </n-collapse-item>
+      </n-collapse>
+      <!-- </template> -->
+    </VueDraggable>
+  </n-scrollbar>
+  <div v-else class="not-shortcut">
+    <span class="tip">暂无导航，去添加吧</span>
+  </div>
+  <ContextMenu
+    ref="contextMenu"
+    size="large"
+    :contextMenuOptions="contextMenuOptions"
+    @handleContextMenuSelect="handleContextMenuSelect"
+  />
+  <ShorcutEditCategoryName
+    v-model:show="editCategoryNameVisible"
+    :preSelectCategoryName="preSelectCategoryName"
+  />
   <AddShortcut
     v-model="isAddShortcutModalVisible"
     :editValue="selectWebsiteDataInfo"
@@ -113,263 +95,137 @@
     @handleBatchAddShortcut="handleBatchAddShortcut"
     @clearSelectedShortcut="clearSelectedShortcut"
   />
-
-  <!-- <UpLoadModal v-model="upLoadModalVisible" @clearSelectedShortcut="clearSelectedShortcut" /> -->
-
-  <ContextMenu
-    ref="contextMenu"
-    size="large"
-    :contextMenuOptions="contextMenuOptions"
-    @handleContextMenuSelect="handleContextMenuSelect"
-  />
-  <n-modal
-    preset="card"
-    v-model:show="editCategoryNameVisible"
-    title="编辑导航分类名称"
-    :bordered="false"
-    @mask-click="handleCloseEditCategoryName"
-  >
-    <n-form
-      :rules="editCategoryNameFormRules"
-      :model="editCategoryNameFormValues"
-      :label-width="80"
-    >
-      <n-form-item label="导航分类名称" path="">
-        <n-input
-          clearable
-          show-count
-          maxlength="14"
-          v-model:value="editCategoryNameFormValues.selectCategoryName"
-          placeholder="请输入导航分类名称"
-        />
-      </n-form-item>
-    </n-form>
-    <template #footer>
-      <n-space justify="end">
-        <n-button strong secondary @click="handleCloseEditCategoryName">取消</n-button>
-        <n-button
-          strong
-          secondary
-          @click="handleSaveEditCategoryName(editCategoryNameFormValues.selectCategoryName)"
-        >
-          保存
-        </n-button>
-      </n-space>
-    </template>
-  </n-modal>
 </template>
-
 <script setup lang="ts">
-import { ref, h, onMounted, onBeforeUnmount } from 'vue';
-import { storeToRefs } from 'pinia';
-import {
-  NButton,
-  NScrollbar,
-  NGrid,
-  NGridItem,
-  NCollapse,
-  NCollapseItem,
-  NModal,
-  NForm,
-  NFormItem,
-  NInput,
-  NSpace
-} from 'naive-ui';
+import { siteStore } from '@/stores';
 import ContextMenu from '@/components/ContextMenu/index.vue';
+import ShorcutEditCategoryName from './ShorcutEditCategoryName.vue';
+import { ref, h } from 'vue';
+import { storeToRefs } from 'pinia';
+import { NScrollbar, NGrid, NGridItem, NCollapse, NCollapseItem } from 'naive-ui';
 import { CircleClose, Edit } from '@element-plus/icons-vue';
-import { siteStore, setStore } from '@/stores';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import AddShortcut from './AddShortcut.vue';
 import type { WebsiteData, WebsiteDataInfo, MessageInfo } from '@/stores/types/type';
 import { ChainOfResponsibility } from '@/utils/tool';
-
-// 引入数据存储
+import { setStore } from '@/stores';
 const set = setStore();
+
 const site = siteStore();
 const { categoryDataList, expandedCategoryNames } = storeToRefs(site);
+// 更新折叠项状态
+function handleCollapseUpdate(expandedNames: string[]) {
+  site.$patch({ expandedCategoryNames: expandedNames });
+}
+//编辑CategoryName start
+
+let preSelectCategoryName = ref('');
+let editCategoryNameVisible = ref(false);
+function handleOpenEditCategoryName(categoryName: string) {
+  preSelectCategoryName.value = categoryName;
+  editCategoryNameVisible.value = true;
+}
+
+//编辑CategoryName End
+
+// 菜单相关start
 
 // 图标渲染函数
 function renderIcon(iconName: string) {
   return () => h(SvgIcon, { iconName: `icon-${iconName}` });
 }
+// 右键菜单相关数据
+let contextMenuOptions = ref([
+  { label: '编辑', key: 'edit', icon: renderIcon('edit') },
+  { label: '删除', key: 'delete', icon: renderIcon('delete') }
+]);
 
-// 更新折叠项状态
-function handleCollapseUpdate(expandedNames: string[]) {
-  site.$patch({ expandedCategoryNames: expandedNames });
+const selectWebsiteDataInfo = ref<WebsiteDataInfo | null>(null);
+
+// 菜单是否显示
+const contextMenu = ref();
+
+// 处理右键菜单的打开
+function handleShortcutContextMenu(
+  event: MouseEvent,
+  categoryName: string,
+  websiteData: WebsiteData
+) {
+  event.preventDefault();
+  selectWebsiteDataInfo.value = { categoryName, websiteData };
+  contextMenu.value.handleShowContextMenu(event);
 }
 
-//编辑CategoryName
-const editCategoryNameFormRules = {
-  selectCategoryName: {
-    required: true,
-    message: '请输入导航分类名称',
-    trigger: ['input', 'blur']
+// 处理右键菜单选择
+function handleContextMenuSelect(action: string) {
+  if (!selectWebsiteDataInfo.value) return;
+  switch (action) {
+    case 'edit':
+      isEditMode.value = true;
+      isAddShortcutModalVisible.value = true;
+      break;
+    case 'delete':
+      confirmRemoveShortcut(
+        selectWebsiteDataInfo.value!.categoryName,
+        selectWebsiteDataInfo.value!.websiteData
+      );
+      break;
   }
-};
-let selectCategoryName = ref('');
-let editCategoryNameFormValues = ref({
-  selectCategoryName: ''
-});
-let editCategoryNameVisible = ref(false);
-function handleOpenEditCategoryName(categoryName: string) {
-  console.log('categoryName', categoryName);
-  selectCategoryName.value = categoryName;
-  editCategoryNameFormValues.value.selectCategoryName = categoryName;
-  editCategoryNameVisible.value = true;
 }
-function handleCloseEditCategoryName() {
-  editCategoryNameVisible.value = false;
-}
-function handleSaveEditCategoryName(newCategoryName: string) {
-  const categoryData = site.findCategoryData(selectCategoryName.value);
-  categoryData && (categoryData.categoryName = newCategoryName);
-  handleCloseEditCategoryName();
+// 菜单相关end
+
+//提示是否删除导航
+function confirmRemoveShortcut(categoryName: string, websiteData: WebsiteData) {
+  const promise = new Promise((resolve, reject) => {
+    window.$dialog.warning({
+      title: '删除导航',
+      content: `确认删除 ${websiteData.name} 导航？此操作将无法恢复！`,
+      positiveText: '删除',
+      negativeText: '取消',
+      onPositiveClick: () => {
+        removeShortcut(categoryName, websiteData);
+        resolve('删除');
+      },
+      onNegativeClick: () => {
+        reject('取消');
+      }
+    });
+  });
+  return promise;
 }
 
-//编辑CategoryName End
+// 删除导航
+function removeShortcut(categoryName: string, shortcut: WebsiteData) {
+  const categoryData = categoryDataList.value.find((cat) => cat.categoryName === categoryName);
+  if (categoryData) {
+    categoryData.websiteDataList = categoryData.websiteDataList.filter(
+      (sc) => sc.url !== shortcut.url
+    );
+    window.$message.success('导航删除成功');
+  }
+}
 
-function messageTip(messageInfo: MessageInfo) {
-  if (messageInfo.state === 'success') {
-    window.$message.success(messageInfo.message);
+// 导航跳转
+function openWebsite(url: string) {
+  const formattedUrl = url.startsWith('http') ? url : `//${url}`;
+  if (set.urlJumpType === 'href') {
+    window.location.href = formattedUrl;
+  } else {
+    window.open(formattedUrl, '_blank');
   }
-  if (messageInfo.state === 'error') {
-    window.$message.error(messageInfo.message);
-  }
-  return messageInfo.state;
 }
 
 // 添加导航弹窗相关数据
 const isAddShortcutModalVisible = ref(false);
 const isEditMode = ref(false);
-
-// 定义一个常量，存储 script 标签的 id
-const scriptDataId: string = 'json-script';
-// 下载导航文件
-function downloadHtmlFile() {
-  // 定义一个包含 HTML 内容的字符串
-  const htmlStr: string = `
-    <!DOCTYPE html> <!-- 声明文档类型为 HTML -->
-    <html lang="en"> <!-- 设置语言为英语 -->
-
-      <head>
-        <meta charset="UTF-8"> <!-- 设置字符编码为 UTF-8 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 适配不同设备的视口设置 -->
-        <title>导航集合</title> <!-- 网页标题 -->
-      </head>
-
-      <body>
-      </body> <!-- 网页主体部分，当前为空 -->
-      <script id="${scriptDataId}" type="application/json"> <!-- 创建一个 script 标签，id 为 json-script，内容为 JSON 格式的数据 -->
-        ${JSON.stringify(site.categoryDataList)} <!-- 将 categoryDataList 转换为 JSON 字符串并插入到 script 标签中 -->
-      <\/script>
-      <script> <!-- 另一个 script 标签，用于处理 JSON 数据 -->
-        // 获取刚刚插入的 script 标签
-        const jsonDom = document.querySelector("#${scriptDataId}"); 
-        // 获取 script 标签中的文本内容（JSON 字符串）
-        const jsonStr = jsonDom.innerText; 
-        // 将 JSON 字符串解析为 JavaScript 对象
-        const jsonData = JSON.parse(jsonStr); 
-        // 打印解析后的数据到控制台
-        console.log('jsonData', jsonData); 
-        
-        // 获取网页的主体部分
-        const bodyDom = document.querySelector("body");
-        
-        // 定义一个函数，用于生成网站链接的 HTML
-        function getWebsiteDataListDom(websiteDataList) {
-          // 初始化一个空字符串，用于存放生成的 HTML
-          let htmlStr = ""; 
-          // 遍历传入的每个网站数据项
-          websiteDataList.forEach(item => {
-            // 为每个网站生成一个列表项的 HTML，并拼接到 htmlStr 中
-            htmlStr +=
-              \`
-                <dd><a href="\${item.url}" target="_blank">\${item.name}</a></dd>
-              \`
-          });
-          // 返回生成的 HTML 字符串
-          return htmlStr;
-        }
-        
-        // 遍历解析后的数据
-        jsonData.forEach(item => {
-          // 将每个分类和对应的网站链接添加到网页主体中
-          bodyDom.innerHTML +=
-            \`
-              <dl>
-                <dt>
-                  <h2>\${item.categoryName}</h2> <!-- 分类名称 -->
-                </dt>
-                \${getWebsiteDataListDom(item.websiteDataList)} <!-- 获取该分类下的网站链接 -->
-              </dl>
-            \`
-        });
-      <\/script> <!-- 结束脚本 -->
-    <\/html>
-  `;
-
-  // 创建一个 Blob 对象，将 HTML 字符串封装成一个可下载的文件
-  const htmlStrBolo = new Blob([htmlStr], { type: 'text/html' });
-  // 创建一个指向 Blob 对象的 URL
-  const htmlStrUrl = URL.createObjectURL(htmlStrBolo);
-
-  // 创建一个链接元素
-  const aLink = document.createElement('a');
-  // 设置链接的 href 属性为刚刚生成的 URL
-  aLink.href = htmlStrUrl;
-  // 设置下载文件的名称
-  aLink.download = '导航下载文件.html';
-  // 触发链接的点击事件，开始下载
-  aLink.click();
-  // 释放之前创建的 URL 对象，释放内存
-  URL.revokeObjectURL(htmlStrUrl);
-}
-
-onMounted(() => {
-  document.querySelector('#shortCutUploadInput')?.addEventListener('change', uploadHtmlFile);
-});
-
-onBeforeUnmount(() => {
-  document.querySelector('#shortCutUploadInput')?.removeEventListener('change', uploadHtmlFile);
-});
-
-function uploadHtmlFile(this: HTMLInputElement, event: Event) {
-  if (this.files) {
-    const fileReader = new FileReader();
-    fileReader.readAsText(this.files![0] as Blob);
-    const reg = /id="json-script".*?>(.*?)<\/script>/s;
-    fileReader.onload = function (res) {
-      if (typeof fileReader.result === 'string') {
-        console.log('res', res, fileReader.result);
-        const dataStr = fileReader.result.match(reg)?.[1];
-        console.log('dataStr', dataStr);
-        if (dataStr) {
-          const newCategoryDataList = JSON.parse(dataStr);
-          console.log(newCategoryDataList);
-          site.setCategoryDataList(newCategoryDataList);
-        }
-      }
-    };
-  }
-}
-// 上传文件
-function clickFileDom() {
-  const fileDom: HTMLInputElement | null = document.querySelector('#shortCutUploadInput');
-  if (fileDom) {
-    fileDom.click();
-  } else {
-    console.warn('元素不存在');
-  }
-}
-
 // 打开添加导航弹窗
 function openAddShortcutModal() {
   isEditMode.value = false;
   isAddShortcutModalVisible.value = true;
   clearSelectedShortcut();
 }
-
+defineExpose({ openAddShortcutModal });
 // 关闭添加导航弹窗
 function closeAddShortcutModal() {
   isAddShortcutModalVisible.value = false;
@@ -439,187 +295,110 @@ function handleAddShortcut(categoryName: string, websiteData: WebsiteData | Webs
     return 'next';
   }
 }
-
-// 右键菜单相关数据
-let contextMenuOptions = ref([
-  { label: '编辑', key: 'edit', icon: renderIcon('edit') },
-  { label: '删除', key: 'delete', icon: renderIcon('delete') }
-]);
-
-const selectWebsiteDataInfo = ref<WebsiteDataInfo | null>(null);
-
-const contextMenu = ref();
-
-// 处理右键菜单的打开
-function handleShortcutContextMenu(
-  event: MouseEvent,
-  categoryName: string,
-  websiteData: WebsiteData
-) {
-  event.preventDefault();
-  selectWebsiteDataInfo.value = { categoryName, websiteData };
-  contextMenu.value.handleShowContextMenu(event);
-}
-
-// 处理右键菜单选择
-function handleContextMenuSelect(action: string) {
-  if (!selectWebsiteDataInfo.value) return;
-  switch (action) {
-    case 'edit':
-      isEditMode.value = true;
-      isAddShortcutModalVisible.value = true;
-      break;
-    case 'delete':
-      confirmRemoveShortcut(
-        selectWebsiteDataInfo.value!.categoryName,
-        selectWebsiteDataInfo.value!.websiteData
-      );
-      break;
+function messageTip(messageInfo: MessageInfo) {
+  if (messageInfo.state === 'success') {
+    window.$message.success(messageInfo.message);
   }
-}
-
-//提示是否删除导航
-function confirmRemoveShortcut(categoryName: string, websiteData: WebsiteData) {
-  const promise = new Promise((resolve, reject) => {
-    window.$dialog.warning({
-      title: '删除导航',
-      content: `确认删除 ${websiteData.name} 导航？此操作将无法恢复！`,
-      positiveText: '删除',
-      negativeText: '取消',
-      onPositiveClick: () => {
-        removeShortcut(categoryName, websiteData);
-        resolve('删除');
-      },
-      onNegativeClick: () => {
-        reject('取消');
-      }
-    });
-  });
-  return promise;
-}
-
-// 删除导航
-function removeShortcut(categoryName: string, shortcut: WebsiteData) {
-  const categoryData = categoryDataList.value.find((cat) => cat.categoryName === categoryName);
-  if (categoryData) {
-    categoryData.websiteDataList = categoryData.websiteDataList.filter(
-      (sc) => sc.url !== shortcut.url
-    );
-    window.$message.success('导航删除成功');
+  if (messageInfo.state === 'error') {
+    window.$message.error(messageInfo.message);
   }
-}
-
-// 导航跳转
-function openWebsite(url: string) {
-  const formattedUrl = url.startsWith('http') ? url : `//${url}`;
-  if (set.urlJumpType === 'href') {
-    window.location.href = formattedUrl;
-  } else {
-    window.open(formattedUrl, '_blank');
-  }
+  return messageInfo.state;
 }
 </script>
-
 <style lang="scss" scoped>
-.shortcut__content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  :deep(.n-collapse) .n-collapse-item__header > .n-collapse-item__header-main {
-    padding: 10px;
+:deep(.n-collapse) .n-collapse-item__header > .n-collapse-item__header-main {
+  padding: 10px;
+  border-radius: 8px;
+}
+:deep(.n-collapse-item__header-main) {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+.shortcut-list {
+  padding-left: 10px;
+  box-sizing: border-box;
+  .shortcut-item {
+    cursor: pointer;
+    height: 60px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--main-background-light-color);
     border-radius: 8px;
-  }
-  :deep(.n-collapse-item__header-main) {
+    font-size: 16px;
+    transition:
+      background-color 0.3s,
+      box-shadow 0.3s;
+    .name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: var(--main-background-hover-color);
+      box-shadow: 0 0 0px 2px var(--main-background-hover-color);
+    }
+    &:active {
+      box-shadow: none;
     }
   }
-  .shortcut-list {
-    padding-left: 10px;
-    box-sizing: border-box;
-    .shortcut-item {
-      cursor: pointer;
-      height: 60px;
-      padding: 0 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      background-color: var(--main-background-light-color);
+}
+.footer__btn-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 15px 0;
+  .footer__btn-group--left {
+    grid-column: 1 / 2;
+    display: flex;
+    .footer__btn {
       border-radius: 8px;
-      font-size: 16px;
-      transition:
-        background-color 0.3s,
-        box-shadow 0.3s;
-      .name {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      &:hover {
-        background-color: var(--main-background-hover-color);
-        box-shadow: 0 0 0px 2px var(--main-background-hover-color);
-      }
-      &:active {
-        box-shadow: none;
-      }
-    }
-  }
-  .footer__btn-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 15px 0;
-    .footer__btn-group--left {
-      grid-column: 1 / 2;
-      display: flex;
-      .footer__btn {
-        border-radius: 8px;
-        width: 80px;
-        height: 40px;
-        background-color: var(--main-background-light-color);
-        line-height: 40px;
-        text-align: center;
-        cursor: pointer;
-        #shortCutUploadInput {
-          display: none;
-        }
-      }
-      div + div {
-        margin-left: 10px;
-      }
-    }
-    .shortcut__add {
-      width: 240px;
+      width: 80px;
       height: 40px;
-      justify-self: center;
-      border-radius: 8px;
       background-color: var(--main-background-light-color);
       line-height: 40px;
       text-align: center;
       cursor: pointer;
+      #shortCutUploadInput {
+        display: none;
+      }
+    }
+    div + div {
+      margin-left: 10px;
     }
   }
-  .icon_span--style {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
+  .shortcut__add {
+    width: 240px;
+    height: 40px;
+    justify-self: center;
+    border-radius: 8px;
+    background-color: var(--main-background-light-color);
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
   }
-  .icon--padding6 {
-    padding: 6px;
-    &:hover {
-      border-radius: 6px;
-    }
+}
+.icon_span--style {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
   }
-  .icon--padding10 {
-    padding: 10px;
-    &:hover {
-      border-radius: 10px;
-    }
+}
+.icon--padding6 {
+  padding: 6px;
+  &:hover {
+    border-radius: 6px;
+  }
+}
+.icon--padding10 {
+  padding: 10px;
+  &:hover {
+    border-radius: 10px;
   }
 }
 .not-shortcut {
