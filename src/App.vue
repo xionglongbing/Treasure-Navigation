@@ -6,7 +6,6 @@
       <header class="page-header">
         <div class="header--fix">
           <MenuList />
-          <SearchInp @contextmenu.stop />
         </div>
       </header>
       <Transition name="fade" mode="out-in">
@@ -19,13 +18,9 @@
           @contextmenu="mainContextmenu"
           @keydown="mainPressKeyboard"
         >
+          <SearchInp @contextmenu.stop />
           <!-- <ShortCut /> -->
-          <MainColorModal v-show="!!status.menuStatus" @contextmenu.stop>
-            <!-- <Transition name="fade" mode="out-in"> -->
-            <ToolBox v-show="status.menuStatus === 'menu'" />
-            <AllSet v-show="status.menuStatus === 'set'" />
-            <!-- </Transition> -->
-          </MainColorModal>
+          <AllFunc @contextmenu.stop />
         </main>
         <div v-else id="loading">
           <img src="/icon/logo.png" alt="logo" class="logo" />
@@ -113,22 +108,31 @@ onMounted(() => {
   height: 100%;
 }
 .page-main__layout {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   .page-header {
     width: 100%;
-    height: 110px;
+    height: 58px;
     padding: 10px;
     backdrop-filter: blur(80px); // 可以成为fixed的基准父元素
     .header--fix {
       position: fixed;
       top: 0;
+      left: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
       height: 100%;
     }
+  }
+  .layout-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 #loading {
