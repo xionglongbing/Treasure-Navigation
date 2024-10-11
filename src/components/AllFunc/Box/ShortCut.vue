@@ -365,40 +365,7 @@ function messageTip(messageInfo: MessageInfo) {
     }
   }
 }
-.footer__btn-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 15px 0;
-  .footer__btn-group--left {
-    grid-column: 1 / 2;
-    display: flex;
-    .footer__btn {
-      border-radius: 8px;
-      width: 80px;
-      height: 40px;
-      background-color: var(--main-background-light-color);
-      line-height: 40px;
-      text-align: center;
-      cursor: pointer;
-      #shortCutUploadInput {
-        display: none;
-      }
-    }
-    div + div {
-      margin-left: 10px;
-    }
-  }
-  .shortcut__add {
-    width: 240px;
-    height: 40px;
-    justify-self: center;
-    border-radius: 8px;
-    background-color: var(--main-background-light-color);
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-  }
-}
+
 .icon_span--style {
   display: flex;
   align-items: center;

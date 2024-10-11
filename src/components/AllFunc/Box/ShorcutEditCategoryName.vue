@@ -1,5 +1,6 @@
 <template>
   <n-modal
+    class="Shorcut-Edit__modal"
     preset="card"
     v-model:show="show"
     title="编辑导航分类名称"
@@ -36,7 +37,7 @@
   </n-modal>
 </template>
 <script setup lang="ts">
-import { NModal, NInput } from 'naive-ui';
+import { NModal, NInput, NButton } from 'naive-ui';
 import { siteStore } from '@/stores';
 const site = siteStore();
 
@@ -81,3 +82,10 @@ function handleSaveEditCategoryName(newCategoryName: string) {
 
 //编辑CategoryName End
 </script>
+<style lang="scss" scoped>
+.Shorcut-Edit__modal {
+  .n-button + .n-button {
+    margin-left: 10px;
+  }
+}
+</style>

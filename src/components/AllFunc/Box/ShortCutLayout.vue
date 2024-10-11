@@ -170,17 +170,9 @@ function openAddShortcutModal() {
     .footer__btn-group--left {
       grid-column: 1 / 2;
       display: flex;
-      .footer__btn {
-        border-radius: 8px;
-        width: 80px;
-        height: 40px;
-        background-color: var(--main-background-light-color);
-        line-height: 40px;
-        text-align: center;
-        cursor: pointer;
-        #shortCutUploadInput {
-          display: none;
-        }
+
+      #shortCutUploadInput {
+        display: none;
       }
       div + div {
         margin-left: 10px;
