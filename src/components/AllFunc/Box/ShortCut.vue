@@ -25,6 +25,14 @@
               <Edit />
             </el-icon>
           </span>
+          <span
+            class="icon_span--style icon--padding6"
+            @click.stop="handleDeleteEditCategoryName(categoryData.categoryName)"
+          >
+            <el-icon style="vertical-align: middle">
+              <CircleClose />
+            </el-icon>
+          </span>
         </template>
         <template #arrow>
           <SvgIcon
@@ -34,7 +42,7 @@
         </template>
         <n-collapse-item :name="categoryData.categoryName">
           <template #header
-            ><div class="ccccc">{{ categoryData.categoryName }}</div></template
+            ><div>{{ categoryData.categoryName }}</div></template
           >
           <VueDraggable
             target=".shortcut-list"
@@ -118,7 +126,7 @@ const { categoryDataList, expandedCategoryNames } = storeToRefs(site);
 function handleCollapseUpdate(expandedNames: string[]) {
   site.$patch({ expandedCategoryNames: expandedNames });
 }
-//编辑CategoryName start
+//编辑CategoryName
 
 let preSelectCategoryName = ref('');
 let editCategoryNameVisible = ref(false);
@@ -126,8 +134,20 @@ function handleOpenEditCategoryName(categoryName: string) {
   preSelectCategoryName.value = categoryName;
   editCategoryNameVisible.value = true;
 }
-
-//编辑CategoryName End
+//删除CategoryName
+function handleDeleteEditCategoryName(categoryName: string) {
+  preSelectCategoryName.value = categoryName;
+  window.$dialog.warning({
+    title: '删除导航',
+    content: `真的真的确认删除 ${categoryName} 分类吗？此操作将删除${categoryName}中所有的导航！`,
+    positiveText: '删除',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      site.deleteCategoryData(categoryName);
+    },
+    onNegativeClick: () => {}
+  });
+}
 
 // 菜单相关start
 

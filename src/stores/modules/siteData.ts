@@ -20,16 +20,35 @@ const useSiteDataStore = defineStore(
       categoryDataList: defaultCategoriesList,
       expandedCategoryNames: defaultCategoriesList.map((item) => item.categoryName)
     });
+    // 所有的导航分类名称
     const categoryNameList = computed(() =>
       state.categoryDataList.map((item) => item.categoryName)
     );
+    // 直接覆盖之前所有的数据
     function setCategoryDataList(newCategoryDataList: CategoryData[]) {
       state.categoryDataList = newCategoryDataList;
     }
+    // 根据导航分类名称，查找出所有的导航list
     function findCategoryData(categoryName: string) {
       const categoryData = state.categoryDataList.find((cat) => cat.categoryName === categoryName);
       return categoryData;
     }
+    // 根据导航分类名称，查找对应导航的索引Index
+    function findCategoryDataIndex(categoryName: string) {
+      const categoryDataIndex = state.categoryDataList.findIndex(
+        (cat) => cat.categoryName === categoryName
+      );
+      return categoryDataIndex;
+    }
+
+    function deleteCategoryData(categoryName: string) {
+      const categoryDataIndex = findCategoryDataIndex(categoryName);
+      if (categoryDataIndex !== -1) {
+        state.categoryDataList.splice(categoryDataIndex, 1);
+      }
+    }
+
+    // 查找是否有重复
     function findWebsiteData({
       categoryName,
       websiteData,
@@ -157,7 +176,8 @@ const useSiteDataStore = defineStore(
       categoryNameList,
       batchAddCount,
       changebatchAddCount,
-      setCategoryDataList
+      setCategoryDataList,
+      deleteCategoryData
     };
   },
   {
