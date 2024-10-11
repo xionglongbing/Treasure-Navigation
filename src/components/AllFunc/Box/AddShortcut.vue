@@ -243,6 +243,6 @@ function judgeFormValues() {
 </style>
 <style>
 .n-card > .n-card__content {
-  padding-right: 0;
+  /* padding-right: 0; */
 }
 </style>
