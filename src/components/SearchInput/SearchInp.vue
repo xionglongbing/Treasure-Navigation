@@ -4,7 +4,7 @@
     :class="[
       'search-input',
       set.smallInput ? 'small' : null,
-      status.menuStatus === 'focus' ? 'focus' : null
+      status.menuStatus === '' ? '' : 'fixTop'
     ]"
     @click.stop
   >
@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { statusStore, setStore } from '@/stores';
 import SearchEngine from '@/components/SearchInput/SearchEngine.vue';
 import Suggestions from '@/components/SearchInput/Suggestions.vue';
@@ -70,19 +70,25 @@ const status = statusStore();
 
 //input滚动时的动画
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
-onMounted(() => {
-  gsap.to('.search-input', {
-    duration: 1,
-    scrollTrigger: {
-      start: 'top top',
-      trigger: '.search-input'
-    },
-    y: -45,
-    updated() {}
-  });
-});
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// gsap.registerPlugin(ScrollTrigger);
+// watch(
+//   () => status.menuStatus,
+//   (val) => {
+//     if (!val) {
+//       gsap.to('.search-input', {
+//         duration: 1,
+//         left: 200,
+//         top: '10px'
+//       });
+//     } else {
+//       gsap.to('.search-input', {
+//         duration: 1,
+//         y: -45
+//       });
+//     }
+//   }
+// );
 
 // 搜索框配置
 const inputTip = import.meta.env.VITE_INPUT_TIP ?? '想要搜点什么';
@@ -191,8 +197,12 @@ const changeEngine = () => {
 </script>
 
 <style lang="scss" scoped>
+.fixTop {
+  position: fixed;
+  top: 8px;
+  transition: width 0.35s linear;
+}
 .search-input {
-  // position: absolute;
   display: flex;
   flex-direction: row;
   align-items: center;

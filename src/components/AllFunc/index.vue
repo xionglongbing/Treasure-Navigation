@@ -1,7 +1,8 @@
 <template>
   <!-- 功能区 -->
   <div
-    class="main-box big"
+    v-show="showMainBox"
+    class="main-box"
     @click.stop
     @contextmenu.stop="
       (e) => {
@@ -10,25 +11,30 @@
     "
   >
     <Transition name="fade" mode="out-in">
-      <ToolBox v-if="status.siteStatus === 'menu'" />
-      <AllSet v-else-if="status.siteStatus === 'set'" />
+      <ToolBox v-if="status.menuStatus === 'menu'" />
+      <AllSet v-else-if="status.menuStatus === 'set'" />
     </Transition>
   </div>
 </template>
 
 <script setup>
 import { statusStore } from '@/stores';
+import { computed } from 'vue';
 import ToolBox from '@/components/AllFunc/ToolBox.vue';
 import AllSet from '@/components/AllFunc/AllSet.vue';
 
 const status = statusStore();
+let showMainBox = computed(() => status.menuStatus === 'menu' || status.menuStatus === 'set');
 </script>
 
 <style lang="scss" scoped>
 .main-box {
   position: absolute;
-  width: 80%;
-  height: 64vh;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  width: 90%;
+  height: 86%;
   max-width: 1200px;
   background-color: var(--main-background-light-color);
   backdrop-filter: blur(20px);

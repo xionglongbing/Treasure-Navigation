@@ -42,7 +42,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
 // import { ElIcon } from 'element-plus';
-import { Edit } from '@element-plus/icons-vue';
 import { statusStore } from '@/stores';
 const status = statusStore();
 console.log('status', status);
