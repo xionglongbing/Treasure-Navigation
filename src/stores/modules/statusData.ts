@@ -9,7 +9,7 @@ const useStatusDataStore = defineStore(
     // 定义状态
     const state = reactive<StatusDataState>({
       imgLoadStatus: false,
-      menuStatus: '',
+      menuStatus: 'menu',
       engineChangeStatus: false,
       searchInputValue: ''
     });
@@ -47,7 +47,7 @@ const useStatusDataStore = defineStore(
     persist: {
       key: 'statusData',
       storage: window.localStorage,
-      paths: ['mainBoxBig']
+      paths: ['menuStatus']
     }
   }
 );
