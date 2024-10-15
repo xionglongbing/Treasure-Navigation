@@ -1,6 +1,6 @@
 <template>
   <n-scrollbar v-if="categoryDataList.length">
-    <VueDraggable :animation="150" v-model="categoryDataList">
+    <VueDraggable :disabled="disabledDrag" :animation="150" v-model="categoryDataList">
       <n-collapse
         v-for="categoryData in categoryDataList"
         :key="categoryData.categoryName"
@@ -45,6 +45,7 @@
             ><div>{{ categoryData.categoryName }}</div></template
           >
           <VueDraggable
+            :disabled="disabledDrag"
             target=".shortcut-list"
             :animation="150"
             v-model="categoryData.websiteDataList"
@@ -118,6 +119,16 @@ import AddShortcut from './AddShortcut.vue';
 import type { WebsiteData, WebsiteDataInfo, MessageInfo } from '@/stores/types/type';
 import { ChainOfResponsibility } from '@/utils/tool';
 import { setStore } from '@/stores';
+
+let disabledDrag = ref(true);
+if (
+  navigator.userAgent.match(/Mobi/i) ||
+  navigator.userAgent.match(/Android/i) ||
+  navigator.userAgent.match(/iPhone/i)
+) {
+  // 当前设备是移动设备
+  disabledDrag.value = true;
+}
 const set = setStore();
 
 const site = siteStore();
