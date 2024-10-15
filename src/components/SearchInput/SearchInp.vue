@@ -197,18 +197,20 @@ const changeEngine = () => {
 </script>
 
 <style lang="scss" scoped>
-.fixTop {
+.search-input.fixTop {
   position: fixed;
   top: 8px;
   transition: width 0.35s linear;
 }
 .search-input {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
-  max-width: 680px;
-  width: calc(100% - 60px);
+  max-width: 50%;
+  width: calc(100% - 200px);
   transition: width 0.35s linear;
+  z-index: 3;
   .mask {
     position: fixed;
     top: 0;
