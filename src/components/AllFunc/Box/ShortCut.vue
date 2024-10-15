@@ -120,7 +120,7 @@ import type { WebsiteData, WebsiteDataInfo, MessageInfo } from '@/stores/types/t
 import { ChainOfResponsibility } from '@/utils/tool';
 import { setStore } from '@/stores';
 
-let disabledDrag = ref(true);
+let disabledDrag = ref(false);
 if (
   navigator.userAgent.match(/Mobi/i) ||
   navigator.userAgent.match(/Android/i) ||
