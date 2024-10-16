@@ -66,6 +66,7 @@
                 "
                 @click="openWebsite(websiteData.url)"
               >
+                <img :src="formatUrlIndex(websiteData.url)+'/favicon.ico'" onerror="this.src='/icon/treasureBag.jpg';this.onerror=null;" class="websiteData__favicon">
                 <span class="name">{{ websiteData.name }}</span>
                 <span
                   class="icon_span--style icon--padding10"
@@ -246,6 +247,13 @@ function openWebsite(url: string) {
     window.open(formattedUrl, '_blank');
   }
 }
+// 格式化url，得到域名
+function formatUrlIndex(url: string) {
+  const urlReg = /(http[s]?:\/\/.*?)\//
+  const urlIndex = url.match(urlReg)?.[1];
+  console.log('urlIndex',urlIndex);
+  return urlIndex;
+}
 
 // 添加导航弹窗相关数据
 const isAddShortcutModalVisible = ref(false);
@@ -376,7 +384,11 @@ function messageTip(messageInfo: MessageInfo) {
     }
   }
 }
-
+.websiteData__favicon {
+  width:20px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
 .icon_span--style {
   display: flex;
   align-items: center;
