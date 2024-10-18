@@ -1,21 +1,21 @@
 <template>
   <div class="shortcut__content box__padding--lr20">
-    <ShortCut ref="shortCut" />
+    <ShortCut ref="shortCut" v-bind="$attrs"/>
     <div class="footer__btn-group">
       <div class="footer__btn-group--left">
         <div class="footer__btn" @click="downloadHtmlFile">
           <SvgIcon iconName="icon-xiazai" />
-          <span class="name">下载</span>
+          <span class="btnName">下载</span>
         </div>
         <div class="footer__btn" @click="clickFileDom">
           <input type="file" name="上传" id="shortCutUploadInput" />
           <SvgIcon iconName="icon-shangchuan" />
-          <span class="name">上传</span>
+          <span class="btnName">上传</span>
         </div>
       </div>
-      <div class="shortcut__add" @click="openAddShortcutModal">
+      <div class="shortcut__add" @click="openAddShortcutModal" v-if="props.isShowAddShortcut">
         <SvgIcon iconName="icon-add" />
-        <span class="name">添加导航</span>
+        <span class="btnName">添加导航</span>
       </div>
     </div>
   </div>
@@ -28,7 +28,13 @@ import ShortCut from './ShortCut.vue';
 
 // 引入数据存储
 const site = siteStore();
-
+// 定义props
+const props = defineProps({
+  isShowAddShortcut: {
+    type: Boolean,
+    default: true
+  }
+});
 // 定义一个常量，存储 script 标签的 id
 const scriptDataId: string = 'json-script';
 // 下载导航文件
@@ -188,6 +194,9 @@ function openAddShortcutModal() {
       text-align: center;
       cursor: pointer;
     }
+  }
+  .btnName {
+    margin-left: 5px;
   }
 }
 </style>

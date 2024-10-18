@@ -66,14 +66,30 @@
                 "
                 @click="openWebsite(websiteData.url)"
               >
-                <img :src="formatUrlIndex(websiteData.url)+'/favicon.ico'" onerror="this.src='/icon/treasureBag.jpg';this.onerror=null;" class="websiteData__favicon">
-                <span class="name">{{ websiteData.name }}</span>
+                <div class="shortcut__icon-text">
+                  <img
+                    :src="formatUrlIndex(websiteData.url) + '/favicon.ico'"
+                    onerror="this.src='/icon/treasureBag.jpg';this.onerror=null;"
+                    class="websiteData__favicon"
+                  />
+                  <span class="name">{{ websiteData.name }}</span>
+                </div>
                 <span
+                  v-if="isShowClose"
                   class="icon_span--style icon--padding10"
                   @click.stop="confirmRemoveShortcut(categoryData.categoryName, websiteData)"
                 >
                   <el-icon style="vertical-align: middle">
                     <CircleClose />
+                  </el-icon>
+                </span>
+                <span
+                  v-if="isShowAddToCustom"
+                  class="icon_span--style icon--padding10"
+                  @click.stop="confirmRemoveShortcut(categoryData.categoryName, websiteData)"
+                >
+                  <el-icon style="vertical-align: middle">
+                    <CirclePlus />
                   </el-icon>
                 </span>
               </n-grid-item>
@@ -89,13 +105,13 @@
   </div>
   <ContextMenu
     ref="contextMenu"
+    v-if="isShowContextMenu"
     size="large"
     :contextMenuOptions="contextMenuOptions"
     @handleContextMenuSelect="handleContextMenuSelect"
   />
   <ShorcutEditCategoryName
     v-model:show="editCategoryNameVisible"
-    :preSelectCategoryName="preSelectCategoryName"
   />
   <AddShortcut
     v-model="isAddShortcutModalVisible"
@@ -113,7 +129,7 @@ import ShorcutEditCategoryName from './ShorcutEditCategoryName.vue';
 import { ref, h } from 'vue';
 import { storeToRefs } from 'pinia';
 import { NScrollbar, NGrid, NGridItem, NCollapse, NCollapseItem } from 'naive-ui';
-import { CircleClose, Edit } from '@element-plus/icons-vue';
+import { CircleClose, CirclePlus, Edit } from '@element-plus/icons-vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import AddShortcut from './AddShortcut.vue';
@@ -121,6 +137,18 @@ import type { WebsiteData, WebsiteDataInfo, MessageInfo } from '@/stores/types/t
 import { ChainOfResponsibility } from '@/utils/tool';
 import { setStore } from '@/stores';
 
+// 接收props
+const { isDefaultShort = false } = defineProps<{
+  isDefaultShort?: Boolean;
+}>();
+let isShowClose = true;
+let isShowAddToCustom = false;
+let isShowContextMenu = true;
+if (isDefaultShort) {
+  isShowClose = false;
+  isShowAddToCustom = true;
+  isShowContextMenu = false;
+}
 let disabledDrag = ref(false);
 if (
   navigator.userAgent.match(/Mobi/i) ||
@@ -249,9 +277,9 @@ function openWebsite(url: string) {
 }
 // 格式化url，得到域名
 function formatUrlIndex(url: string) {
-  const urlReg = /(http[s]?:\/\/.*?)\//
+  const urlReg = /(http[s]?:\/\/.*?)\//;
   const urlIndex = url.match(urlReg)?.[1];
-  console.log('urlIndex',urlIndex);
+  console.log('urlIndex', urlIndex);
   return urlIndex;
 }
 
@@ -370,6 +398,11 @@ function messageTip(messageInfo: MessageInfo) {
     transition:
       background-color 0.3s,
       box-shadow 0.3s;
+    .shortcut__icon-text {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
     .name {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -385,7 +418,7 @@ function messageTip(messageInfo: MessageInfo) {
   }
 }
 .websiteData__favicon {
-  width:20px;
+  width: 20px;
   border-radius: 50%;
   margin-right: 4px;
 }
