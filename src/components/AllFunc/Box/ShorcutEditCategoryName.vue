@@ -43,12 +43,11 @@ const site = siteStore();
 
 let show = defineModel('show', { type: Boolean });
 
-interface Props {
-  preSelectCategoryName: string;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  preSelectCategoryName: ''
+const props = defineProps({
+  preSelectCategoryName: {
+    type: String,
+    default: ''
+  }
 });
 
 let editCategoryNameFormValues = ref({
