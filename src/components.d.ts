@@ -13,6 +13,7 @@ declare module 'vue' {
     Background: typeof import('./components/Background/index.vue')['default']
     ContextMenu: typeof import('./components/ContextMenu/index.vue')['default']
     Cover: typeof import('./components/Cover.vue')['default']
+    DefaultShortCut: typeof import('./components/AllFunc/Box/DefaultShortCut.vue')['default']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     Footer: typeof import('./components/Footer.vue')['default']
     IconCommunity: typeof import('./components/icons/IconCommunity.vue')['default']
