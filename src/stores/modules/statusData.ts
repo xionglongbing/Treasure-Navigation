@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive, toRefs } from 'vue';
-import { storeToRefs } from 'pinia';
-import type { StatusDataState } from '../types/type';
+import type { StatusDataState } from '@/types/type';
 
 const useStatusDataStore = defineStore(
   'statusData',

@@ -8,11 +8,13 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AddShortcut: typeof import('./components/AllFunc/Box/AddShortcut.vue')['default']
+    AddShortcutToCustom: typeof import('./components/AllFunc/Box/AddShortcutToCustom.vue')['default']
     AllFunc: typeof import('./components/AllFunc/index.vue')['default']
     AllSet: typeof import('./components/AllFunc/AllSet.vue')['default']
     Background: typeof import('./components/Background/index.vue')['default']
     ContextMenu: typeof import('./components/ContextMenu/index.vue')['default']
     Cover: typeof import('./components/Cover.vue')['default']
+    CustomShortCut: typeof import('./components/AllFunc/Box/CustomShortCut.vue')['default']
     DefaultShortCut: typeof import('./components/AllFunc/Box/DefaultShortCut.vue')['default']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     Footer: typeof import('./components/Footer.vue')['default']

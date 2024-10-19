@@ -1,6 +1,6 @@
 <template>
   <div class="shortcut__content box__padding--lr20">
-    <ShortCut ref="shortCut" v-bind="$attrs"/>
+    <slot/>
     <div class="footer__btn-group">
       <div class="footer__btn-group--left">
         <div class="footer__btn" @click="downloadHtmlFile">
@@ -157,9 +157,10 @@ function clickFileDom() {
     console.warn('元素不存在');
   }
 }
-const shortCut = ref();
+// 打开添加导航
+const emit = defineEmits(["openAddShortcutModal"])
 function openAddShortcutModal() {
-  shortCut.value.openAddShortcutModal();
+  emit("openAddShortcutModal");
 }
 </script>
 

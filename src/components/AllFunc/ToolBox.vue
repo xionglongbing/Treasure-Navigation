@@ -1,7 +1,7 @@
 <template>
   <n-tabs class="all-box" size="large" justify-content="space-evenly" animated>
     <n-tab-pane class="no-padding height--full" name="link" tab="导航">
-      <ShortCutLayout />
+      <CustomShortCut/>
     </n-tab-pane>
     <n-tab-pane class="height--full" name="more" tab="所有">
       <DefaultShortCut/>
@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { NTabs, NTabPane } from 'naive-ui';
-import ShortCutLayout from '@/components/AllFunc/Box/ShortCutLayout.vue';
+import CustomShortCut from '@/components/AllFunc/Box/CustomShortCut.vue';
 import DefaultShortCut from '@/components/AllFunc/Box/DefaultShortCut.vue';
 </script>
 <style lang="scss" scoped>
