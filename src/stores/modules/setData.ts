@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, reactive, toRefs } from 'vue';
-import type { SetDataState } from '../types/type';
+import type { SetDataState } from '@/types/type';
 
 const useSetDataStore = defineStore(
   'setData',

@@ -8,7 +8,7 @@ import type {
   WebsiteOrBatchData,
   CategoryData,
   MessageInfo
-} from '../types/type';
+} from '@/types/type';
 import { ChainOfResponsibility } from '@/utils/tool';
 
 const useSiteDataStore = defineStore(

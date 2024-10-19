@@ -86,7 +86,7 @@ import { NButton, NForm, NFormItem, NInput, NSelect, NSpace, NModal } from 'naiv
 import { ElMessage } from 'element-plus';
 import { siteStore } from '@/stores';
 import identifyInput from '@/utils/identifyInput';
-import type { WebsiteDataInfo, WebsiteData } from '@/stores/types/type';
+import type { WebsiteDataInfo, WebsiteData } from '@/types/type';
 
 // Props and emit setup
 const props = defineProps({
