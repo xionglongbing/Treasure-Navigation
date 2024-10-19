@@ -40,18 +40,18 @@
         title="请输入搜索内容"
         autocomplete="false"
         :placeholder="inputTip"
-        v-model="status.searchInputValue"
+        v-model="searchInputValue"
         @click.stop="status.setEngineChangeStatus(false)"
         @keydown.stop="pressKeyboard"
       />
-      <div class="go" title="搜索" @click="toSearch(status.searchInputValue)">
+      <div class="go" title="搜索" @click="toSearch(searchInputValue)">
         <SvgIcon iconName="icon-search" className="search" />
       </div>
     </div>
     <!-- 搜索引擎切换 -->
     <SearchEngine />
     <!-- 搜索建议 -->
-    <Suggestions ref="suggestionsRef" :keyWord="status.searchInputValue" @toSearch="toSearch" />
+    <Suggestions ref="suggestionsRef" :keyWord="searchInputValue" @toSearch="toSearch" />
   </div>
 </template>
 
@@ -100,12 +100,14 @@ const searchInputRef = ref<HTMLInputElement | null>(null);
 // 搜索建议子组件
 const suggestionsRef = ref<InstanceType<typeof Suggestions> | null>(null);
 
+// 搜索的关键词
+let searchInputValue = ref("");
 // 关闭搜索框
 const closeSearchInput = (check = false) => {
   if (check && !set.autoInputBlur) {
     // status.setMenuStatus('focus');
   } else {
-    status.setSearchInputValue('');
+    searchInputValue.value = "";
     // status.setMenuStatus('normal');
     searchInputRef.value?.blur();
   }

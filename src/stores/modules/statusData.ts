@@ -10,8 +10,7 @@ const useStatusDataStore = defineStore(
     const state = reactive<StatusDataState>({
       imgLoadStatus: false,
       menuStatus: 'menu',
-      engineChangeStatus: false,
-      searchInputValue: ''
+      engineChangeStatus: false
     });
 
     // 定义actions
@@ -22,16 +21,13 @@ const useStatusDataStore = defineStore(
 
     const setMenuStatus = (value: StatusDataState['menuStatus'], alsoChange = true) => {
       state.menuStatus = value;
-      if (value !== 'focus') state.searchInputValue = '';
-      if (alsoChange) state.engineChangeStatus = false;
+      if (alsoChange) {
+        setEngineChangeStatus(false);
+      }
     };
 
     const setEngineChangeStatus = (value: boolean) => {
       state.engineChangeStatus = value;
-    };
-
-    const setSearchInputValue = (value: string) => {
-      state.searchInputValue = value;
     };
 
     // 返回状态和方法
@@ -39,8 +35,7 @@ const useStatusDataStore = defineStore(
       ...toRefs(state),
       setImgLoadStatus,
       setMenuStatus,
-      setEngineChangeStatus,
-      setSearchInputValue
+      setEngineChangeStatus
     };
   },
   {
