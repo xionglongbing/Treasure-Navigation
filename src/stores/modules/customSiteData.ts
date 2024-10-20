@@ -2,40 +2,38 @@ import { defineStore } from 'pinia';
 import { ref, reactive, toRefs, computed } from 'vue';
 import defaultCategoriesList from '@/assets/defaultShortCut.json';
 import type {
-  SiteDataState,
+  CustomSiteDataState,
   WebsiteData,
   WebsiteDataInfo,
   WebsiteOrBatchData,
   CategoryData,
   MessageInfo
 } from '@/types/type';
-import { ChainOfResponsibility } from '@/utils/tool';
 
 const useSiteDataStore = defineStore(
   'siteData',
   () => {
     // 定义状态
-    const state = reactive<SiteDataState>({
-      // categoryDataList: defaultShortCut,
-      categoryDataList: defaultCategoriesList,
-      expandedCategoryNames: defaultCategoriesList.map((item) => item.categoryName)
+    const state = reactive<CustomSiteDataState>({
+      customCategoryDataList: defaultCategoriesList,
+      customExpandedCategoryNames: defaultCategoriesList.map((item) => item.categoryName)
     });
     // 所有的导航分类名称
-    const categoryNameList = computed(() =>
-      state.categoryDataList.map((item) => item.categoryName)
+    const customCategoryNameList = computed(() =>
+      state.customCategoryDataList.map((item) => item.categoryName)
     );
     // 直接覆盖之前所有的数据
     function setCategoryDataList(newCategoryDataList: CategoryData[]) {
-      state.categoryDataList = newCategoryDataList;
+      state.customCategoryDataList = newCategoryDataList;
     }
     // 根据导航分类名称，查找出所有的导航list
     function findCategoryData(categoryName: string) {
-      const categoryData = state.categoryDataList.find((cat) => cat.categoryName === categoryName);
+      const categoryData = state.customCategoryDataList.find((cat) => cat.categoryName === categoryName);
       return categoryData;
     }
     // 根据导航分类名称，查找对应导航的索引Index
     function findCategoryDataIndex(categoryName: string) {
-      const categoryDataIndex = state.categoryDataList.findIndex(
+      const categoryDataIndex = state.customCategoryDataList.findIndex(
         (cat) => cat.categoryName === categoryName
       );
       return categoryDataIndex;
@@ -44,7 +42,7 @@ const useSiteDataStore = defineStore(
     function deleteCategoryData(categoryName: string) {
       const categoryDataIndex = findCategoryDataIndex(categoryName);
       if (categoryDataIndex !== -1) {
-        state.categoryDataList.splice(categoryDataIndex, 1);
+        state.customCategoryDataList.splice(categoryDataIndex, 1);
       }
     }
 
@@ -121,7 +119,7 @@ const useSiteDataStore = defineStore(
       websiteData,
       categoryData
     }: WebsiteDataInfo & { categoryData?: CategoryData }): MessageInfo {
-      if (!categoryNameList.value.includes(categoryName)) {
+      if (!customCategoryNameList.value.includes(categoryName)) {
         return { state: 'error', message: '导航添加失败，没有该分类' };
       }
       const isDuplicate = findWebsiteData({ categoryName, websiteData });
@@ -140,7 +138,7 @@ const useSiteDataStore = defineStore(
         categoryName,
         websiteDataList: [websiteData]
       };
-      state.categoryDataList.push(categoryData);
+      state.customCategoryDataList.push(categoryData);
       return categoryData;
     }
 
@@ -173,7 +171,7 @@ const useSiteDataStore = defineStore(
       deleteShortcutItem,
       findCategoryData,
       findWebsiteData,
-      categoryNameList,
+      customCategoryNameList,
       batchAddCount,
       changebatchAddCount,
       setCategoryDataList,

@@ -83,7 +83,7 @@
 import { ref, computed } from 'vue';
 import { NButton, NForm, NFormItem, NInput, NSelect, NSpace, NModal } from 'naive-ui';
 import { ElMessage } from 'element-plus';
-import { siteStore } from '@/stores';
+import { customSiteStore } from '@/stores';
 import identifyInput from '@/utils/identifyInput';
 import type { WebsiteDataInfo, WebsiteData } from '@/types/type';
 
@@ -122,11 +122,11 @@ const isVisible = computed({
 });
 
 // 获取站点数据
-const site = siteStore();
+const site = customSiteStore();
 
 // 分类选项
 const categoryOptions = computed(() =>
-  site.categoryNameList.map((item) => ({ label: item, value: item }))
+  site.customCategoryNameList.map((item) => ({ label: item, value: item }))
 );
 
 // // 用于控制表单提交类型：false为添加，true为编辑

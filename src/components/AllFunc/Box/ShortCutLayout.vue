@@ -22,12 +22,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { siteStore } from '@/stores';
-import ShortCut from './ShortCut.vue';
+import { onMounted, onBeforeUnmount } from 'vue';
+import { customSiteStore } from '@/stores';
 
 // 引入数据存储
-const site = siteStore();
+const site = customSiteStore();
 // 定义props
 const props = defineProps({
   isShowAddShortcut: {

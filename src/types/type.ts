@@ -25,11 +25,9 @@ export interface SetDataState {
 
 //site
 
-export interface SiteDataState {
+export interface CustomSiteDataState {
   customCategoryDataList: CategoryData[];
   customExpandedCategoryNames: string[];
-  siteDefalutCategoryDataList: CategoryData[];
-  siteDefalutExpandedCategoryNames: string[];
 }
 
 // 定义statusData状态类型
