@@ -10,14 +10,8 @@
         class="collapse-content"
       >
         <template #header-extra>
-          <!-- <SvgIcon
-                :iconName="
-                  expandedCategoryNames.includes(categoryData.categoryName)
-                    ? 'icon-a-jingyajingqiwasetianlabiaoqingxiaolian'
-                    : 'icon-a-gangaliuhanbiaoqingxiaolian'
-                "
-              /> -->
           <span
+            v-if="isShowEditCategoryNameBtn"
             class="icon_span--style icon--padding6"
             @click.stop="handleOpenEditCategoryName(categoryData.categoryName)"
           >
@@ -26,8 +20,9 @@
             </el-icon>
           </span>
           <span
+            v-if="isShowDeleteCategoryNameBtn"
             class="icon_span--style icon--padding6"
-            @click.stop="handleDeleteEditCategoryName(categoryData.categoryName)"
+            @click.stop="handleDeleteCategoryName(categoryData.categoryName)"
           >
             <el-icon style="vertical-align: middle">
               <CircleClose />
@@ -86,7 +81,7 @@
                 <span
                   v-if="isShowAddToCustom"
                   class="icon_span--style icon--padding10"
-                  @click.stop="confirmRemoveShortcut(categoryData.categoryName, websiteData)"
+                  @click.stop="addShortcutToCustom()"
                 >
                   <el-icon style="vertical-align: middle">
                     <CirclePlus />
@@ -117,6 +112,7 @@
     v-model="isAddShortcutModalVisible"
     :editValue="selectWebsiteDataInfo"
     :isEditMode="isEditMode"
+    :isDefaultShort="isDefaultShort"
     @handleAddOrEditShortcut="handleAddOrEditShortcut"
     @handleBatchAddShortcut="handleBatchAddShortcut"
     @clearSelectedShortcut="clearSelectedShortcut"
@@ -133,22 +129,34 @@ import { CircleClose, CirclePlus, Edit } from '@element-plus/icons-vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import AddShortcut from './AddShortcut.vue';
-import type { WebsiteData, WebsiteDataInfo, MessageInfo } from '@/stores/types/type';
+import type { WebsiteData, WebsiteDataInfo, MessageInfo } from '@/types/type';
 import { ChainOfResponsibility } from '@/utils/tool';
 import { setStore } from '@/stores';
 
 // 接收props
 const { isDefaultShort = false } = defineProps<{
-  isDefaultShort?: Boolean;
+  isDefaultShort?: boolean;
 }>();
+const emit = defineEmits(["addShortcutToCustom"])
+
+// default导航选项卡模式
 let isShowClose = true;
 let isShowAddToCustom = false;
 let isShowContextMenu = true;
+let isShowDeleteCategoryNameBtn = true;
+let isShowEditCategoryNameBtn = true;
 if (isDefaultShort) {
   isShowClose = false;
   isShowAddToCustom = true;
   isShowContextMenu = false;
+  isShowDeleteCategoryNameBtn = false;
+  isShowEditCategoryNameBtn = false;
 }
+function addShortcutToCustom() {
+  emit("addShortcutToCustom");
+}
+
+// 移动端禁止拖拽
 let disabledDrag = ref(false);
 if (
   navigator.userAgent.match(/Mobi/i) ||
@@ -175,7 +183,7 @@ function handleOpenEditCategoryName(categoryName: string) {
   editCategoryNameVisible.value = true;
 }
 //删除CategoryName
-function handleDeleteEditCategoryName(categoryName: string) {
+function handleDeleteCategoryName(categoryName: string) {
   preSelectCategoryName.value = categoryName;
   window.$dialog.warning({
     title: '删除导航',

@@ -3,7 +3,7 @@
     preset="card"
     v-model:show="isVisible"
     :mask-closable="false"
-    :title="`${props.isEditMode ? '编辑' : '添加'}导航`"
+    :title="`${props.isEditMode ? '编辑' : '添加'}${props.isDefaultShort ? '到自定义' : ''}导航`"
     :bordered="false"
   >
     <n-form
@@ -64,8 +64,7 @@
     <template #footer>
       <n-space justify="space-between">
         <div class="footer__btn-group">
-          <n-button strong secondary @click="closeModal">导入文件</n-button>
-          <n-button strong secondary @click="handleBatchAdd(!isBatchAdd)">{{
+          <n-button v-if="isShowBatchBtn" strong secondary @click="handleBatchAdd(!isBatchAdd)">{{
             isBatchAdd ? '取消批量添加' : '批量添加'
           }}</n-button>
         </div>
@@ -89,14 +88,20 @@ import identifyInput from '@/utils/identifyInput';
 import type { WebsiteDataInfo, WebsiteData } from '@/types/type';
 
 // Props and emit setup
+
 const props = defineProps({
   modelValue: Boolean,
   isEditMode: Boolean,
   editValue: {
     type: Object as () => WebsiteDataInfo | null,
     default: null
-  }
+  },
+  isDefaultShort: Boolean
 });
+let isShowBatchBtn = ref(true);
+if(props.isDefaultShort) {
+  isShowBatchBtn.value = false;
+}
 const emit = defineEmits([
   'update:model-value',
   'updateShortcut',
@@ -150,27 +155,31 @@ const formRules = {
     message: '请选择或输入导航分类',
     trigger: ['input', 'blur']
   },
-  'websiteData.name': {
-    required: true,
-    message: '请输入导航名称',
-    trigger: ['input', 'blur']
-  },
-  'websiteData.url': {
-    required: true,
-    validator(rule: any, value: string) {
-      if (!value) {
-        return new Error('请输入站点链接');
-      } else if (identifyInput(value) !== 'url') {
-        return new Error('请检查是否为正确的网址');
-      }
-      return true;
+  websiteData: {
+    name: {
+      required: true,
+      message: '请输入导航名称',
+      trigger: ['input', 'blur']
     },
-    trigger: ['input', 'blur']
+    url: {
+      required: true,
+      validator(rule: any, value: string) {
+        if (!value) {
+          return new Error('请输入站点链接');
+        } else if (identifyInput(value) !== 'url') {
+          return new Error('请检查是否为正确的网址');
+        }
+        return true;
+      },
+      trigger: ['input', 'blur']
+    }
   }
 };
 
 // 表单引用
 const formRef = ref();
+
+// 批量处理start
 
 let isBatchAdd = ref();
 let batchAddFormValues = ref<WebsiteData[]>([]);
@@ -197,8 +206,10 @@ const closeModal = () => {
 };
 
 // 提交表单，添加或编辑导航
-const handleSubmit = () => {
-  if (judgeFormValues() === 'next') {
+const handleSubmit = async () => {
+  const isPassForm = await judgeFormValues();
+  console.log('isPassForm', isPassForm);
+  if (isPassForm === 'next') {
     if (isBatchAdd.value) {
       emit(
         'handleBatchAddShortcut',
@@ -211,15 +222,18 @@ const handleSubmit = () => {
     }
   }
 };
-function judgeFormValues() {
-  formRef.value?.validate((errors: any) => {
-    console.log('errors', errors);
-    if (errors) {
-      ElMessage.error('请检查您的输入');
-      return;
-    }
-  });
-  return 'next';
+async function judgeFormValues() {
+  try {
+    await formRef.value?.validate((errors: any) => {
+      if (errors) {
+        ElMessage.error('请检查您的输入');
+        return {msg:"????"};
+      }
+    });
+    return 'next';
+  } catch (error) {
+    console.log('error', error);
+  }
 }
 </script>
 <style lang="scss" scoped>

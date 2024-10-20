@@ -8,7 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AddShortcut: typeof import('./components/AllFunc/Box/AddShortcut.vue')['default']
-    AddShortcutToCustom: typeof import('./components/AllFunc/Box/AddShortcutToCustom.vue')['default']
     AllFunc: typeof import('./components/AllFunc/index.vue')['default']
     AllSet: typeof import('./components/AllFunc/AllSet.vue')['default']
     Background: typeof import('./components/Background/index.vue')['default']
