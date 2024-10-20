@@ -19,7 +19,6 @@
           @keydown="mainPressKeyboard"
         >
           <SearchInp @contextmenu.stop />
-          <!-- <ShortCut /> -->
           <AllFunc @contextmenu.stop />
         </main>
         <div v-else id="loading">
