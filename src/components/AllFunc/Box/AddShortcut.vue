@@ -126,7 +126,7 @@ const site = customSiteStore();
 
 // 分类选项
 const categoryOptions = computed(() =>
-  site.customCategoryNameList.map((item) => ({ label: item, value: item }))
+  site.categoryNameList.map((item) => ({ label: item, value: item }))
 );
 
 // // 用于控制表单提交类型：false为添加，true为编辑

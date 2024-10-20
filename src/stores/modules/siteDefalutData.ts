@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, reactive, toRefs, computed } from 'vue';
-import defaultCategoriesList from '@/assets/defaultShortCut.json';
+import siteDefalutShortCut from '@/assets/siteDefalutShortCut.json';
 import type {
   SiteDataState,
   WebsiteData,
@@ -15,8 +15,8 @@ const useSiteDataStore = defineStore(
   () => {
     // 定义状态
     const state = reactive<SiteDataState>({
-      categoryDataList: defaultCategoriesList,
-      expandedCategoryNames: defaultCategoriesList.map((item) => item.categoryName)
+      categoryDataList: siteDefalutShortCut,
+      expandedCategoryNames: siteDefalutShortCut.map((item) => item.categoryName)
     });
     // 所有的导航分类名称
     const categoryNameList = computed(() =>
@@ -27,7 +27,7 @@ const useSiteDataStore = defineStore(
       state.categoryDataList = newCategoryDataList;
     }
     // 直接覆盖之前展开的选项
-    function setExpandedCategoryNames(newCategoryDataList: SiteDataState["expandedCategoryNames"]) {
+    function setExpandedCategoryNames(newCategoryDataList: SiteDataState['expandedCategoryNames']) {
       state.expandedCategoryNames = newCategoryDataList;
     }
     // 根据导航分类名称，查找出所有的导航list

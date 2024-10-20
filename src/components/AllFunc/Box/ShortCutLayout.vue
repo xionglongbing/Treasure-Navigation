@@ -53,7 +53,7 @@ function downloadHtmlFile() {
         <!-- 网页主体部分，当前为空 -->
       </body> 
       <script id="${scriptDataId}" type="application/json"> 
-        ${JSON.stringify(site.customCategoryDataList)} 
+        ${JSON.stringify(site.categoryDataList)} 
       <\/script>
       
       <script> 
