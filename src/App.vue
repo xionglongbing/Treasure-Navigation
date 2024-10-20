@@ -48,7 +48,6 @@ import MenuList from '@/components/Layout/Menu.vue';
 
 const set = setStore();
 const status = statusStore();
-console.log('status', status);
 const mainClickable = ref<boolean>(false);
 
 // 获取配置

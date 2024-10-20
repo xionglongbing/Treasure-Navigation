@@ -9,7 +9,8 @@ const useStatusDataStore = defineStore(
     const state = reactive<StatusDataState>({
       imgLoadStatus: false,
       menuStatus: 'menu',
-      engineChangeStatus: false
+      engineChangeStatus: false,
+      toolBoxCheckedtabs: "sitDefaultNav"
     });
 
     // 定义actions
@@ -29,19 +30,25 @@ const useStatusDataStore = defineStore(
       state.engineChangeStatus = value;
     };
 
+    function setToolBoxCheckedtabs(val: StatusDataState["toolBoxCheckedtabs"]) {
+      state.toolBoxCheckedtabs = val;
+    }
+    
+
     // 返回状态和方法
     return {
       ...toRefs(state),
       setImgLoadStatus,
       setMenuStatus,
-      setEngineChangeStatus
+      setEngineChangeStatus,
+      setToolBoxCheckedtabs
     };
   },
   {
     persist: {
       key: 'statusData',
       storage: window.localStorage,
-      paths: ['menuStatus']
+      paths: ['menuStatus','toolBoxCheckedtabs']
     }
   }
 );

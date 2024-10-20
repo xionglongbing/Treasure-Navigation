@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, reactive, toRefs, computed } from 'vue';
-import defaultCategoriesList from '@/assets/defaultShortCut.json';
+import siteCustomDefalutShortCut from '@/assets/customShortCut.json';
 import type {
   SiteDataState,
   WebsiteData,
@@ -11,12 +11,12 @@ import type {
 } from '@/types/type';
 
 const useSiteDataStore = defineStore(
-  'siteData',
+  'siteCustomData',
   () => {
     // 定义状态
     const state = reactive<SiteDataState>({
-      categoryDataList: defaultCategoriesList,
-      expandedCategoryNames: defaultCategoriesList.map((item) => item.categoryName)
+      categoryDataList: siteCustomDefalutShortCut,
+      expandedCategoryNames: siteCustomDefalutShortCut.map((item) => item.categoryName)
     });
     // 所有的导航分类名称
     const categoryNameList = computed(() =>
@@ -185,7 +185,7 @@ const useSiteDataStore = defineStore(
   },
   {
     persist: {
-      key: 'siteData',
+      key: 'siteCustomData',
       storage: window.localStorage
     }
   }

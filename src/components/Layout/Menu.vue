@@ -44,8 +44,6 @@ import { reactive } from 'vue';
 // import { ElIcon } from 'element-plus';
 import { statusStore } from '@/stores';
 const status = statusStore();
-console.log('status', status);
-
 defineOptions({
   name: 'MenuList'
 });

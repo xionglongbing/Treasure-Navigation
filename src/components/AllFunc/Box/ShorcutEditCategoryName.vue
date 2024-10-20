@@ -38,8 +38,8 @@
 </template>
 <script setup lang="ts">
 import { NModal, NInput, NButton } from 'naive-ui';
-import { customSiteStore } from '@/stores';
-const site = customSiteStore();
+import { siteCustomStore } from '@/stores';
+const site = siteCustomStore();
 
 let show = defineModel('show', { type: Boolean });
 

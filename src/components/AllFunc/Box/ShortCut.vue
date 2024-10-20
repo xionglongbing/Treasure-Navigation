@@ -81,7 +81,7 @@
                 <span
                   v-if="isShowAddToCustom"
                   class="icon_span--style icon--padding10"
-                  @click.stop="addShortcutToCustom()"
+                  @click.stop="addShortcutToCustom(categoryData.categoryName, websiteData)"
                 >
                   <el-icon style="vertical-align: middle">
                     <CirclePlus />
@@ -105,21 +105,18 @@
     :contextMenuOptions="contextMenuOptions"
     @handleContextMenuSelect="handleContextMenuSelect"
   />
-  <ShorcutEditCategoryName
-    v-model:show="editCategoryNameVisible"
-  />
+  <ShorcutEditCategoryName v-model:show="editCategoryNameVisible" />
   <AddShortcut
     v-model="isAddShortcutModalVisible"
     :editValue="selectWebsiteDataInfo"
     :isEditMode="isEditMode"
-    :isDefaultShort="isDefaultShort"
+    :isDefaultShort="props.isDefaultShort"
     @handleAddOrEditShortcut="handleAddOrEditShortcut"
     @handleBatchAddShortcut="handleBatchAddShortcut"
     @clearSelectedShortcut="clearSelectedShortcut"
   />
 </template>
 <script setup lang="ts">
-import { siteStore } from '@/stores';
 import ContextMenu from '@/components/ContextMenu/index.vue';
 import ShorcutEditCategoryName from './ShorcutEditCategoryName.vue';
 import { ref, h } from 'vue';
@@ -132,12 +129,22 @@ import AddShortcut from './AddShortcut.vue';
 import type { WebsiteData, WebsiteDataInfo, MessageInfo } from '@/types/type';
 import { ChainOfResponsibility } from '@/utils/tool';
 import { setStore } from '@/stores';
+const set = setStore();
 
 // 接收props
-const { isDefaultShort = false } = defineProps<{
-  isDefaultShort?: boolean;
-}>();
-const emit = defineEmits(["addShortcutToCustom"])
+const props = defineProps({
+  isDefaultShort: {
+    type: Boolean,
+    default: false
+  },
+  getSitedata: {
+    required: true,
+    type: Function
+  }
+});
+const emit = defineEmits(['addShortcutToCustom', "handleAddShortcut"]);
+const site = props.getSitedata();
+console.log('site', site);
 
 // default导航选项卡模式
 let isShowClose = true;
@@ -145,15 +152,17 @@ let isShowAddToCustom = false;
 let isShowContextMenu = true;
 let isShowDeleteCategoryNameBtn = true;
 let isShowEditCategoryNameBtn = true;
-if (isDefaultShort) {
+if (props.isDefaultShort) {
   isShowClose = false;
   isShowAddToCustom = true;
   isShowContextMenu = false;
   isShowDeleteCategoryNameBtn = false;
   isShowEditCategoryNameBtn = false;
 }
-function addShortcutToCustom() {
-  emit("addShortcutToCustom");
+function addShortcutToCustom(categoryName: string, websiteData: WebsiteData) {
+  console.log('categoryName, websiteData', categoryName, websiteData);
+  selectWebsiteDataInfo.value = { categoryName, websiteData };
+  emit('addShortcutToCustom');
 }
 
 // 移动端禁止拖拽
@@ -166,9 +175,7 @@ if (
   // 当前设备是移动设备
   disabledDrag.value = true;
 }
-const set = setStore();
 
-const site = siteStore();
 const { categoryDataList, expandedCategoryNames } = storeToRefs(site);
 // 更新折叠项状态
 function handleCollapseUpdate(expandedNames: string[]) {
@@ -287,7 +294,6 @@ function openWebsite(url: string) {
 function formatUrlIndex(url: string) {
   const urlReg = /(http[s]?:\/\/.*?)\//;
   const urlIndex = url.match(urlReg)?.[1];
-  console.log('urlIndex', urlIndex);
   return urlIndex;
 }
 
@@ -298,7 +304,6 @@ const isEditMode = ref(false);
 function openAddShortcutModal() {
   isEditMode.value = false;
   isAddShortcutModalVisible.value = true;
-  clearSelectedShortcut();
 }
 defineExpose({ openAddShortcutModal });
 // 关闭添加导航弹窗
@@ -360,6 +365,10 @@ function handleEditShortcut(categoryName: string, websiteData: WebsiteData) {
 
 function handleAddShortcut(categoryName: string, websiteData: WebsiteData | WebsiteData[]) {
   if (isEditMode.value) {
+    return 'next';
+  }
+  if(props.isDefaultShort) {
+    emit("handleAddShortcut", { categoryName, websiteData });
     return 'next';
   }
   // 添加新导航

@@ -35,6 +35,7 @@ export interface StatusDataState {
   imgLoadStatus: boolean;
   menuStatus: '' | 'normal' | 'focus' | 'menu' | 'set';
   engineChangeStatus: boolean;
+  toolBoxCheckedtabs: string;
 }
 
 // 定义导航数据类型

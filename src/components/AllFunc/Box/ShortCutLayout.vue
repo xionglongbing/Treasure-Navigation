@@ -23,10 +23,10 @@
 
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue';
-import { customSiteStore } from '@/stores';
+import { siteCustomStore } from '@/stores';
 
 // 引入数据存储
-const site = customSiteStore();
+const site = siteCustomStore();
 // 定义props
 const props = defineProps({
   isShowAddShortcut: {

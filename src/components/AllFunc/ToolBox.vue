@@ -1,9 +1,9 @@
 <template>
-  <n-tabs class="all-box" size="large" justify-content="space-evenly" animated>
-    <n-tab-pane class="no-padding height--full" name="link" tab="导航">
+  <n-tabs :default-value="status.toolBoxCheckedtabs" @update:value="handleUpdateTabsValue" class="all-box" size="large" justify-content="space-evenly" animated>
+    <n-tab-pane class="no-padding height--full" name="customNav" tab="导航">
       <CustomShortCut/>
     </n-tab-pane>
-    <n-tab-pane class="height--full" name="more" tab="所有">
+    <n-tab-pane class="height--full" name="sitDefaultNav" tab="所有">
       <DefaultShortCut/>
     </n-tab-pane>
     <n-tab-pane class="height--full" name="note" tab="便签"> 即将完善 </n-tab-pane>
@@ -14,6 +14,11 @@
 import { NTabs, NTabPane } from 'naive-ui';
 import CustomShortCut from '@/components/AllFunc/Box/CustomShortCut.vue';
 import DefaultShortCut from '@/components/AllFunc/Box/DefaultShortCut.vue';
+import { statusStore } from '@/stores';
+const status = statusStore();
+function handleUpdateTabsValue(value: string) {
+  status.setToolBoxCheckedtabs(value)
+}
 </script>
 <style lang="scss" scoped>
 .height--full {

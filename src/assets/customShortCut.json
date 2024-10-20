@@ -1,0 +1,41 @@
+[
+  {
+    "categoryName": "视频网站",
+    "websiteDataList": [
+      {
+        "name": "哔哩哔哩",
+        "url": "https://www.bilibili.com/"
+      },
+      {
+        "name": "腾讯视频",
+        "url": "https://v.qq.com/"
+      },
+      {
+        "name": "爱奇艺",
+        "url": "https://www.iqiyi.com/"
+      }
+     
+    ]
+  },
+  {
+    "categoryName": "编程开发",
+    "websiteDataList": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/"
+      },
+      {
+        "name": "Gitee",
+        "url": "https://gitee.com/"
+      },
+      {
+        "name": "Vue.js",
+        "url": "https://vuejs.org/"
+      },
+      {
+        "name": "React",
+        "url": "https://reactjs.org/"
+      }
+    ]
+  }
+]

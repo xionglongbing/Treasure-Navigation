@@ -11,7 +11,7 @@ import type {
 } from '@/types/type';
 
 const useSiteDataStore = defineStore(
-  'siteData',
+  'siteDefalutData',
   () => {
     // 定义状态
     const state = reactive<SiteDataState>({
@@ -185,7 +185,7 @@ const useSiteDataStore = defineStore(
   },
   {
     persist: {
-      key: 'siteData',
+      key: 'siteDefalutData',
       storage: window.localStorage
     }
   }
