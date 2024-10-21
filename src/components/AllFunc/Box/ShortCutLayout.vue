@@ -7,8 +7,8 @@
           <SvgIcon iconName="icon-xiazai" />
           <span class="btnName">下载</span>
         </div>
-        <div class="footer__btn" @click="clickFileDom">
-          <input type="file" name="上传" id="shortCutUploadInput" />
+        <div class="footer__btn" @click="clickFileDom" v-if="props.isShowUpLoadBtn">
+          <input type="file" name="上传" id="shortCutUploadInput"/>
           <SvgIcon iconName="icon-shangchuan" />
           <span class="btnName">上传</span>
         </div>
@@ -32,7 +32,12 @@ const props = defineProps({
   isShowAddShortcut: {
     type: Boolean,
     default: true
-  }
+  },
+  isShowUpLoadBtn: {
+    type: Boolean,
+    default: true
+  },
+
 });
 // 定义一个常量，存储 script 标签的 id
 const scriptDataId: string = 'json-script';

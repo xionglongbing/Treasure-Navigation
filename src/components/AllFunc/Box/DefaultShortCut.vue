@@ -1,5 +1,5 @@
 <template>
-  <ShortCutLayout :isShowAddShortcut="false" @openAddShortcutModal="openAddShortcutModal">
+  <ShortCutLayout :isShowAddShortcut="false" :isShowUpLoadBtn="false" @openAddShortcutModal="openAddShortcutModal">
     <ShortCut
       ref="shortCut"
       :getSitedata="getSitedata"
