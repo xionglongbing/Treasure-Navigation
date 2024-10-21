@@ -3,7 +3,7 @@
     preset="card"
     v-model:show="isVisible"
     :mask-closable="false"
-    :title="`${props.isEditMode ? '编辑' : '添加'}${props.isDefaultShort ? '到自定义' : ''}导航`"
+    :title="`${props.isEditMode ? '编辑' : '添加'}${props.isDefaultShort ? '到我的' : ''}导航`"
     :bordered="false"
   >
     <n-form
