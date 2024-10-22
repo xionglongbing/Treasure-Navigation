@@ -137,11 +137,14 @@ function uploadHtmlFile(this: HTMLInputElement, event: Event) {
   if (this.files) {
     const fileReader = new FileReader();
     fileReader.readAsText(this.files![0] as Blob);
-    const reg = /id="json-script".*?>(.*?)<\/script>/s;
     fileReader.onload = function (res) {
       if (typeof fileReader.result === 'string') {
-        console.log('res', res, fileReader.result);
-        const dataStr = fileReader.result.match(reg)?.[1];
+        // const reg = /id="json-script".*?>(.*?)<\/script>/s;
+        // const dataStr = fileReader.result.match(reg)?.[1];
+        // 使用DOMParser比正则稍微可读性强一点
+        const dParser = new DOMParser();
+        const doc = dParser.parseFromString(fileReader.result,"text/html");
+        const dataStr = (doc.querySelector("#json-script") as HTMLElement)?.innerText;
         console.log('dataStr', dataStr);
         if (dataStr) {
           const newCategoryDataList = JSON.parse(dataStr);
