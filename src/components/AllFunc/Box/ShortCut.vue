@@ -48,7 +48,7 @@
             <n-grid
               class="shortcut-list"
               responsive="screen"
-              cols="3 s:4 m:5 l:6"
+              cols="2 s:4 m:5 l:6"
               :x-gap="10"
               :y-gap="10"
             >
