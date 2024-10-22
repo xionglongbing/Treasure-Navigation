@@ -419,6 +419,9 @@ function messageTip(messageInfo: MessageInfo) {
       display: flex;
       align-items: center;
       gap: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .name {
       overflow: hidden;
