@@ -61,7 +61,7 @@
                 "
                 @click="openWebsite(websiteData.url)"
               >
-                <div class="shortcut__icon-text">
+                <div class="shortcut__icon-text" :title="websiteData.name">
                   <img
                     :src="formatUrlIndex(websiteData.url) + '/favicon.ico'"
                     onerror="this.src='/icon/treasureBag.jpg';this.onerror=null;"
