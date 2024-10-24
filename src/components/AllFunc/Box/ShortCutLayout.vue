@@ -1,6 +1,6 @@
 <template>
   <div class="shortcut__content box__padding--lr20">
-    <slot/>
+    <slot />
     <div class="footer__btn-group">
       <div class="footer__btn-group--left">
         <div class="footer__btn" @click="downloadHtmlFile">
@@ -8,7 +8,7 @@
           <span class="btnName">下载</span>
         </div>
         <div class="footer__btn" @click="clickFileDom" v-if="props.isShowUpLoadBtn">
-          <input type="file" name="上传" id="shortCutUploadInput"/>
+          <input type="file" name="上传" id="shortCutUploadInput" />
           <SvgIcon iconName="icon-shangchuan" />
           <span class="btnName">上传</span>
         </div>
@@ -24,6 +24,8 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue';
 import { siteCustomStore } from '@/stores';
+import { ChainOfResponsibility } from '@/utils/tool';
+import type { WebsiteData } from '@/types/type';
 
 // 引入数据存储
 const site = siteCustomStore();
@@ -36,8 +38,7 @@ const props = defineProps({
   isShowUpLoadBtn: {
     type: Boolean,
     default: true
-  },
-
+  }
 });
 // 定义一个常量，存储 script 标签的 id
 const scriptDataId: string = 'json-script';
@@ -137,23 +138,51 @@ function uploadHtmlFile(this: HTMLInputElement, event: Event) {
   if (this.files) {
     const fileReader = new FileReader();
     fileReader.readAsText(this.files![0] as Blob);
-    fileReader.onload = function (res) {
+    fileReader.onload = function () {
       if (typeof fileReader.result === 'string') {
-        // const reg = /id="json-script".*?>(.*?)<\/script>/s;
-        // const dataStr = fileReader.result.match(reg)?.[1];
-        // 使用DOMParser比正则稍微可读性强一点
-        const dParser = new DOMParser();
-        const doc = dParser.parseFromString(fileReader.result,"text/html");
-        const dataStr = (doc.querySelector("#json-script") as HTMLElement)?.innerText;
-        console.log('dataStr', dataStr);
-        if (dataStr) {
-          const newCategoryDataList = JSON.parse(dataStr);
-          console.log(newCategoryDataList);
-          site.setCategoryDataList(newCategoryDataList);
-        }
+        const chainParserScriptJson = new ChainOfResponsibility(parserScriptJson); //判断编辑模式
+        const chainParserBookmarksFile = new ChainOfResponsibility(parserBookmarksFile); //判断编辑模式
+        chainParserScriptJson.setNext(chainParserBookmarksFile);
+        chainParserScriptJson.handle(fileReader.result);
       }
     };
   }
+}
+function parserScriptJson(result: string) {
+  // const reg = /id="json-script".*?>(.*?)<\/script>/s;
+  // const dataStr = fileReader.result.match(reg)?.[1];
+  // 使用DOMParser比正则稍微可读性强一点
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(result, 'text/html');
+  const dataStr = (doc.querySelector('#json-script') as HTMLElement)?.textContent;
+  console.log('dataStr', dataStr);
+  // dataStr这是本站存储在<script id="#json-script" type="application/json"> 的数据
+  if (!dataStr) return 'next';
+  if (dataStr) {
+    const newCategoryDataList = JSON.parse(dataStr);
+    console.log(newCategoryDataList);
+    site.setCategoryDataList(newCategoryDataList);
+  }
+}
+function parserBookmarksFile(result: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(result, 'text/html');
+
+  // 获取所有A标签
+  const aElements = doc.querySelectorAll('a');
+  const websiteDataList: WebsiteData[] = [];
+  // 先处理H3元素，构建初始类别
+  aElements.forEach((a) => {
+    let websiteData: WebsiteData = {
+      name: a.textContent || '',
+      url: a.href
+    };
+    if ((a as { icon?: string })?.icon) {
+      websiteData.icon = (a as { icon?: string })?.icon;
+    }
+    websiteDataList.push(websiteData);
+  });
+  site.batchAddCategoryData({ categoryName: '我的书签', websiteDataList });
 }
 // 上传文件
 function clickFileDom() {
@@ -165,9 +194,9 @@ function clickFileDom() {
   }
 }
 // 打开添加导航
-const emit = defineEmits(["openAddShortcutModal"])
+const emit = defineEmits(['openAddShortcutModal']);
 function openAddShortcutModal() {
-  emit("openAddShortcutModal");
+  emit('openAddShortcutModal');
 }
 </script>
 
@@ -193,7 +222,8 @@ function openAddShortcutModal() {
       }
     }
     .shortcut__add {
-      width: 240px;
+      min-width: 90px;
+      width: 100%;
       height: 40px;
       justify-self: center;
       border-radius: 8px;

@@ -3,9 +3,11 @@
   height: 100%;
 }
 .footer__btn {
-  border-radius: 8px;
-  width: 80px;
+  max-width: 80px;
+  min-width: 60px;
+  width: 35%;
   height: 40px;
+  border-radius: 8px;
   background-color: var(--main-background-light-color);
   line-height: 40px;
   text-align: center;
