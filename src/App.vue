@@ -18,6 +18,7 @@
           @contextmenu="mainContextmenu"
           @keydown="mainPressKeyboard"
         >
+          <WeatherTime />
           <SearchInp @contextmenu.stop />
           <AllFunc @contextmenu.stop />
         </main>
@@ -40,9 +41,9 @@ import { getGreeting } from '@/utils/timeTools';
 import Provider from '@/components/Provider.vue';
 import Cover from '@/components/Cover.vue';
 import SearchInp from '@/components/SearchInput/SearchInp.vue';
-import MainColorModal from '@/components/MainColorModal/index.vue';
-import ToolBox from '@/components/AllFunc/ToolBox.vue';
-import AllSet from '@/components/AllFunc/AllSet.vue';
+import WeatherTime from '@/components/WeatherTime/index.vue';
+// import MainColorModal from '@/components/MainColorModal/index.vue';
+import AllFunc from '@/components/AllFunc/index.vue';
 // import ShortCut from '@/components/AllFunc/Box/ShortCut.vue';
 import MenuList from '@/components/Layout/Menu.vue';
 

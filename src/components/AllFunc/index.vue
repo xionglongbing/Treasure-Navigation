@@ -10,10 +10,8 @@
       }
     "
   >
-    <Transition name="fade" mode="out-in">
-      <ToolBox v-if="status.menuStatus === 'menu'" />
-      <AllSet v-else-if="status.menuStatus === 'set'" />
-    </Transition>
+      <ToolBox v-show="status.menuStatus === 'menu'" />
+      <AllSet v-show="status.menuStatus === 'set'" />
   </div>
 </template>
 

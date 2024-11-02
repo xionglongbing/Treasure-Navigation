@@ -146,6 +146,16 @@ const useSiteDataStore = defineStore(
       return categoryData;
     }
 
+    //添加新分类
+    function batchAddCategoryData({ categoryName, websiteDataList}: CategoryData) {
+      const categoryData = {
+        categoryName,
+        websiteDataList
+      };
+      state.categoryDataList.push(categoryData);
+      return categoryData;
+    }
+
     // 删除导航条目
     const deleteShortcutItem = (categoryName: string, shortcutItem: WebsiteData): MessageInfo => {
       const categoryData = findCategoryData(categoryName);
@@ -180,7 +190,8 @@ const useSiteDataStore = defineStore(
       changebatchAddCount,
       setCategoryDataList,
       setExpandedCategoryNames,
-      deleteCategoryData
+      deleteCategoryData,
+      batchAddCategoryData
     };
   },
   {

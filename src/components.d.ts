@@ -34,5 +34,6 @@ declare module 'vue' {
     Suggestions: typeof import('./components/SearchInput/Suggestions.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon.vue')['default']
     ToolBox: typeof import('./components/AllFunc/ToolBox.vue')['default']
+    WeatherTime: typeof import('./components/WeatherTime/index.vue')['default']
   }
 }
