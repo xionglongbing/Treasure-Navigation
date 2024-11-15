@@ -4,7 +4,6 @@
       ref="shortCut"
       :getSitedata="getSitedata"
       :isDefaultShort="true"
-      @addShortcutToCustom="openAddShortcutModal"
       @handleAddShortcut="handleAddShortcut"
     />
   </ShortCutLayout>
@@ -21,8 +20,6 @@ defineOptions({
 const defaultSite = siteDefaultData();
 const siteCustom = siteCustomStore();
 function getSitedata() {
-  console.log("dddddddd",defaultSite);
-
   return defaultSite;
 }
 let shortCut = ref();
