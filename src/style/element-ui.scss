@@ -1,5 +1,6 @@
-.el-icon-style:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 10px;
+.el-icon {
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
 }

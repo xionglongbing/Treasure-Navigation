@@ -4,7 +4,7 @@
   </svg>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -14,7 +14,7 @@ const props = defineProps({
   },
   className: {
     type: String,
-    default: 'i-icon'
+    default: ''
   },
   iconStyle: {
     type: Object
@@ -43,5 +43,9 @@ const svgClass = computed(() => {
   position: relative;
   fill: currentColor;
   vertical-align: -2px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 </style>
