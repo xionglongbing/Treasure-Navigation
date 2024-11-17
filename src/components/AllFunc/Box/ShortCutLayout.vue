@@ -26,6 +26,7 @@ import { onMounted, onBeforeUnmount } from 'vue';
 import { siteCustomStore } from '@/stores';
 import { ChainOfResponsibility } from '@/utils/tool';
 import type { WebsiteData } from '@/types/type';
+import SvgIcon from '@/components/SvgIcon.vue';
 
 // 引入数据存储
 const site = siteCustomStore();
