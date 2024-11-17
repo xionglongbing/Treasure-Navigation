@@ -13,3 +13,12 @@
   text-align: center;
   cursor: pointer;
 }
+.nav__scrollbar__style {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--main-scrollbar-color);
+  }
+}
