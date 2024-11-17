@@ -3,7 +3,7 @@
     <ShortCut ref="shortCut" :getSitedata="getSitedata" :site="siteCustom"/>
   </ShortCutLayout>
 </template>
-<script setup>
+<script setup lang="ts">
 import ShortCut from './ShortCut.vue';
 import ShortCutLayout from './ShortCutLayout.vue';
 import { siteCustomStore } from '@/stores';

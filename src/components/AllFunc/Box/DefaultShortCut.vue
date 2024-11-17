@@ -1,5 +1,9 @@
 <template>
-  <ShortCutLayout :isShowAddShortcut="false" :isShowUpLoadBtn="false" @openAddShortcutModal="openAddShortcutModal">
+  <ShortCutLayout
+    :isShowAddShortcut="false"
+    :isShowUpLoadBtn="false"
+    @openAddShortcutModal="openAddShortcutModal"
+  >
     <ShortCut
       ref="shortCut"
       :getSitedata="getSitedata"
@@ -13,7 +17,7 @@ import ShortCut from './ShortCut.vue';
 import ShortCutLayout from './ShortCutLayout.vue';
 import { siteDefaultData } from '@/stores';
 import { siteCustomStore } from '@/stores';
-import type { MessageInfo } from '@/types/type';
+import type { MessageInfo, WebsiteOrBatchData } from '@/types/type';
 defineOptions({
   name: 'SiteDefaultShortCut'
 });
@@ -27,7 +31,7 @@ function openAddShortcutModal() {
   shortCut.value.openAddShortcutModal();
 }
 
-function handleAddShortcut(val) {
+function handleAddShortcut(val: WebsiteOrBatchData) {
   // 添加新导航
   const res = siteCustom.addCategoryDataOrWebsiteData(val);
   messageTip(res);
