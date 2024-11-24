@@ -28,7 +28,6 @@ declare module 'vue' {
     IconSupport: typeof import('./components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./components/icons/IconTooling.vue')['default']
     Iii: typeof import('./components/icons/iii.vue')['default']
-    'Index copy': typeof import('./components/PicInPic/index copy.vue')['default']
     Loading: typeof import('./components/Loading/index.vue')['default']
     MainColorModal: typeof import('./components/MainColorModal/index.vue')['default']
     Menu: typeof import('./components/Layout/Menu.vue')['default']
