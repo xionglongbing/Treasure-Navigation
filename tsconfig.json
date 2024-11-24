@@ -19,15 +19,6 @@
     },
     "types": ["element-plus/global", "node"] // 指定全局类型定义
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/**/*.d.ts",
-    "src/**/**/*.vue"
-  ],
   "files": [],
   "references": [
     {

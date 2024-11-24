@@ -8,5 +8,9 @@ declare global {
     $notification: NotificationApiInjection;
     $message: MessageApiInjection;
     $dialog: DialogApiInjection;
+    documentPictureInPicture: {
+      requestWindow: (options: { width: number; height: number }) => Promise<Window>;
+      window: Window;
+    };
   }
 }

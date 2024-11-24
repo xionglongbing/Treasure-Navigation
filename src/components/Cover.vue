@@ -30,7 +30,7 @@ const emit = defineEmits<{
 
 // 壁纸随机数
 // 请依据文件夹内的图片个数修改 Math.random() 后面的第一个数字
-const bgRandom = Math.floor(Math.random() * 3 + 1);
+const bgRandom = Math.floor(Math.random() * 6 + 1);
 
 // 赋值壁纸函数
 const setBgUrl = () => {

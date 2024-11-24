@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { statusStore } from '@/stores';
 import { computed } from 'vue';
 import ToolBox from '@/components/AllFunc/ToolBox.vue';

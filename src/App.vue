@@ -27,6 +27,7 @@
           <span class="tip">开发中</span>
         </div>
       </Transition>
+      <NoteDetail />
     </div>
   </Provider>
 </template>
@@ -44,6 +45,7 @@ import SearchInp from '@/components/SearchInput/SearchInp.vue';
 import WeatherTime from '@/components/WeatherTime/index.vue';
 // import MainColorModal from '@/components/MainColorModal/index.vue';
 import AllFunc from '@/components/AllFunc/index.vue';
+import NoteDetail from '@/components/Note/NoteDetail.vue';
 // import ShortCut from '@/components/AllFunc/Box/ShortCut.vue';
 import MenuList from '@/components/Layout/Menu.vue';
 

@@ -42,6 +42,7 @@ export interface StatusDataState {
 export interface WebsiteData {
   name: string;
   url: string;
+  icon?: string
 }
 
 // 定义siteData状态类型
