@@ -58,5 +58,12 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 1000 // 设置为1000kB
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler' // or 'modern'
+      }
+    }
   }
 });
