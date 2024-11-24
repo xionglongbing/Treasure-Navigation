@@ -127,11 +127,12 @@ function syncStylesToPipWindow(pipWindow: Window) {
  */
 function addBodyStylesToPipWindow(pipWindow: Window) {
   // 随机背景样式
-  const bgRandom = Math.floor(Math.random() * 6 + 1);
+  const bgRandom = 3 || Math.floor(Math.random() * 6 + 1);
   const style = document.createElement('style');
   style.textContent = `
     body {
       background-image: url("./background/bg${bgRandom}.jpg");
+      background-size: contain;
     }
   `;
   pipWindow.document.head.appendChild(style);

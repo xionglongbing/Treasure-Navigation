@@ -8,7 +8,7 @@
     >
       <PicInPic
         :show="showPicInPic"
-        @closePicInpicEvent="closePicInpicEvent"
+        @closePicInPicEvent="closePicInPicEvent"
       >
         <Note
           @enterPictureInPicture="enterPictureInPicture"
@@ -41,13 +41,13 @@ function enterPictureInPicture() {
     showPicInPic.value = true;
   });
 }
-function closePicInpicEvent(e: Event) {
+function closePicInPicEvent(e: Event) {
   const target: any = e.target;
   const NoteHeader = target.querySelector('.Note__header');
-  const NoteHeaderText = NoteHeader.textContent;
+  const NoteHeaderText = NoteHeader.innerText;
 
   const NoteBody = target.querySelector('.Note__body');
-  const NoteBodyText = NoteBody.textContent;
+  const NoteBodyText = NoteBody.innerText;
 
   if (noteStore.displayPicInPicNoteData) {
     const newDisplayPicInPicNoteData = {

@@ -50,7 +50,7 @@ let noteData = computed(() => noteStore.displayNoteDetailData);
 
 function handleTitleInput(id: number, event: Event) {
   if (event.target && noteData.value) {
-    const titleTextContent = (event.target as HTMLDivElement).textContent || '';
+    const titleTextContent = (event.target as HTMLDivElement).innerText || '';
     updateNoteDetailData({
       id,
       title: titleTextContent,
@@ -61,7 +61,7 @@ function handleTitleInput(id: number, event: Event) {
 
 function handleContentInput(id: number, event: Event) {
   if (event.target && noteData.value) {
-    const bodyTextContent = (event.target as HTMLDivElement).textContent || '';
+    const bodyTextContent = (event.target as HTMLDivElement).innerText || '';
     updateNoteDetailData({
       id,
       title: noteData.value.title,
