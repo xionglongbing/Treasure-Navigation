@@ -126,7 +126,7 @@ import { CircleClose, CirclePlus, Edit } from '@element-plus/icons-vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import AddShortcut from './AddShortcut.vue';
-import type { WebsiteData, WebsiteDataInfo, MessageInfo } from '@/types/type';
+import type { WebsiteData, WebsiteDataInfo, MessageInfo, CategoryData, SiteDataState } from '@/types/type';
 import { ChainOfResponsibility } from '@/utils/tool';
 import { setStore } from '@/stores';
 const set = setStore();
@@ -139,12 +139,11 @@ const props = defineProps({
   },
   getSitedata: {
     required: true,
-    type: Function
+    type: Function as PropType<() => SiteDataState>
   }
 });
 const emit = defineEmits(['addShortcutToCustom', "handleAddShortcut"]);
-const site = props.getSitedata();
-console.log('site', site);
+const site: any = props.getSitedata();
 
 // default导航选项卡模式
 let isShowClose = true;
@@ -176,10 +175,10 @@ if (
   disabledDrag.value = true;
 }
 
-const { categoryDataList, expandedCategoryNames } = storeToRefs(site);
+const { categoryDataList, expandedCategoryNames } = site;
 // 更新折叠项状态
 function handleCollapseUpdate(expandedNames: string[]) {
-  site.$patch({ expandedCategoryNames: expandedNames });
+  site.setExpandedCategoryNames(  expandedNames );
 }
 //编辑CategoryName
 
@@ -272,10 +271,10 @@ function confirmRemoveShortcut(categoryName: string, websiteData: WebsiteData) {
 
 // 删除导航
 function removeShortcut(categoryName: string, shortcut: WebsiteData) {
-  const categoryData = categoryDataList.value.find((cat) => cat.categoryName === categoryName);
+  const categoryData = categoryDataList.value.find((cat: CategoryData) => cat.categoryName === categoryName);
   if (categoryData) {
     categoryData.websiteDataList = categoryData.websiteDataList.filter(
-      (sc) => sc.url !== shortcut.url
+      (sc: WebsiteData) => sc.url !== shortcut.url
     );
     window.$message.success('导航删除成功');
   }
