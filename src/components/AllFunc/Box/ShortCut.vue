@@ -126,7 +126,7 @@ import { CircleClose, CirclePlus, Edit } from '@element-plus/icons-vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import AddShortcut from './AddShortcut.vue';
-import type { WebsiteData, WebsiteDataInfo, MessageInfo, CategoryData, SiteDataState } from '@/types/type';
+import type { WebsiteData, WebsiteDataInfo, MessageInfo, CategoryData } from '@/types/type';
 import { ChainOfResponsibility } from '@/utils/tool';
 import { setStore } from '@/stores';
 const set = setStore();
@@ -139,11 +139,12 @@ const props = defineProps({
   },
   getSitedata: {
     required: true,
-    type: Function as PropType<() => SiteDataState>
+    type: Function
   }
 });
 const emit = defineEmits(['addShortcutToCustom', "handleAddShortcut"]);
 const site: any = props.getSitedata();
+console.log('site', site);
 
 // default导航选项卡模式
 let isShowClose = true;
@@ -175,7 +176,7 @@ if (
   disabledDrag.value = true;
 }
 
-const { categoryDataList, expandedCategoryNames } = site;
+const { categoryDataList, expandedCategoryNames } = storeToRefs(site) as any;
 // 更新折叠项状态
 function handleCollapseUpdate(expandedNames: string[]) {
   site.setExpandedCategoryNames(  expandedNames );
