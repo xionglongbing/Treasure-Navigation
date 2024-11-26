@@ -272,10 +272,10 @@ function confirmRemoveShortcut(categoryName: string, websiteData: WebsiteData) {
 
 // 删除导航
 function removeShortcut(categoryName: string, shortcut: WebsiteData) {
-  const categoryData = categoryDataList.value.find((cat: CategoryData) => cat.categoryName === categoryName);
+  const categoryData = categoryDataList.value.find((cat: any) => cat.categoryName === categoryName);
   if (categoryData) {
     categoryData.websiteDataList = categoryData.websiteDataList.filter(
-      (sc: WebsiteData) => sc.url !== shortcut.url
+      (sc: any) => sc.url !== shortcut.url
     );
     window.$message.success('导航删除成功');
   }
