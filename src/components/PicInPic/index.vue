@@ -104,7 +104,7 @@ function syncStylesToPipWindow(pipWindow: Window) {
       pipWindow.document.head.appendChild(style);
     } catch (e) {
       // 如果有跨域，访问styleSheet.cssRules时会报错。
-      // 通过 link 引入样式。如<link rel="stylesheet" type="text/css" media="all" href="https://abc.css">
+      // 通过 link 引入样式。如<link rel="stylesheet" type="text/css" href="https://abc.css">
       const link = document.createElement('link');
       /**
        * rel = stylesheet 导入样式表

@@ -48,7 +48,7 @@ const useStatusDataStore = defineStore(
     persist: {
       key: 'statusData',
       storage: window.localStorage,
-      paths: ['menuStatus','toolBoxCheckedtabs']
+      pick: ['menuStatus','toolBoxCheckedtabs']
     }
   }
 );
