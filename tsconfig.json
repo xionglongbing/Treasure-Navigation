@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noEmitOnError": false,
     "target": "ESNext", // 现代JavaScript版本
     "module": "ESNext", // 使用ES模块规范
     "moduleResolution": "Node", // Node模块解析策略
