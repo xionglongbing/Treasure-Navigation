@@ -10,14 +10,20 @@ export default defineStore(
       noteDataList: [
         {
           id: 1,
-          title: 'Sample Title',
-          content: 'Sample Content',
+          title: '备忘便签',
+          content: "1. 吃饭\n2. 喝水\n3. 睡觉",
           updatedTime: new Date()
         },
         {
           id: 2,
-          title: 'Sample two Title',
-          content: 'Sample two Content',
+          title: '学习',
+          content: "1. 加法\n2. 减法\n3. 乘法\n4. 明天学除法",
+          updatedTime: new Date()
+        },
+        {
+          id: 3,
+          title: '疑问',
+          content: "1.  既然猪吃饲料，我们吃猪，为什么不直接吃饲料呢\n2. 空难的死亡率那么高，为什么飞机不在地上跑呢？\n3. 高考满分才750，那怎么才能考985\n4. 既然监狱里都是犯人，那警察叔叔为什么不去监狱里抓人？",
           updatedTime: new Date()
         }
       ],
