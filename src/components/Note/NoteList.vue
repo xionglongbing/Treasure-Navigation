@@ -1,12 +1,22 @@
 <template>
-  <div class="note-list">
+  <VueDraggable
+    class="note-list"
+    :disabled="disabledDrag"
+    :animation="150"
+    v-model="noteStore.noteDataList"
+  >
     <div
       class="note-item__content"
       v-for="noteDataItem in noteStore.noteDataList"
       :key="noteDataItem.id"
       @click="openNote(noteDataItem)"
     >
-      <div class="note-Info__picinpic--mask" v-if="noteDataItem.id === noteStore.displayPicInPicNoteData?.id">画中画模式正在打开中</div>
+      <div
+        class="note-Info__picinpic--mask"
+        v-if="noteDataItem.id === noteStore.displayPicInPicNoteData?.id"
+      >
+        画中画模式正在打开中
+      </div>
       <div v-else class="note-info__content">
         <!-- 标题区域 -->
         <div class="note-item__title">
@@ -22,21 +32,22 @@
           {{ noteDataItem.content }}
         </div>
       </div>
-
     </div>
-  </div>
+  </VueDraggable>
 </template>
 
 <script setup lang="ts">
 import { useNoteDataStore } from '@/stores';
 import { CircleClose } from '@element-plus/icons-vue';
 import type { NoteData } from '@/types/note.ts';
+import { VueDraggable } from 'vue-draggable-plus';
+
 const noteStore = useNoteDataStore();
 
 // 事件定义：处理打开便签
 const openNote = (noteData: NoteData) => {
-  if(noteData.id === noteStore.displayPicInPicNoteData?.id) {
-    return ;
+  if (noteData.id === noteStore.displayPicInPicNoteData?.id) {
+    return;
   }
   noteStore.updateDisplayNoteDetailData(noteData);
 };
@@ -45,6 +56,16 @@ const openNote = (noteData: NoteData) => {
 const handleDeleteNote = (noteData: NoteData) => {
   noteStore.deleteNote(noteData.id);
 };
+// 移动端禁止拖拽
+let disabledDrag = ref(false);
+if (
+  navigator.userAgent.match(/Mobi/i) ||
+  navigator.userAgent.match(/Android/i) ||
+  navigator.userAgent.match(/iPhone/i)
+) {
+  // 当前设备是移动设备
+  disabledDrag.value = true;
+}
 </script>
 
 <style lang="scss" scoped>
