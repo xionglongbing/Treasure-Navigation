@@ -8,7 +8,7 @@ const useStatusDataStore = defineStore(
     // 定义状态
     const state = reactive<StatusDataState>({
       imgLoadStatus: false,
-      menuStatus: 'menu',
+      menuStatus: '',
       engineChangeStatus: false,
       toolBoxCheckedtabs: "sitDefaultNav"
     });
