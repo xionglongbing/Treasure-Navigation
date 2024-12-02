@@ -1,25 +1,22 @@
 <template>
   <footer id="footer" @click.stop>
     <div class="copyright">
-      <span class="site-name">{{ siteName }}</span>
+      <span class="site-name">宝藏导航</span>
       <span class="year">{{ fullYear }}</span>
-      <span class="author" @click="jumpTo(copyrightLink ?? 'https://github.com/imsyy/Snavigation')">
-        {{ siteAuthor }}
-      </span>
       <span v-if="icp" class="icp" @click="jumpTo('https://beian.miit.gov.cn')">
         {{ icp }}
       </span>
-      <span class="about" @click="aboutSiteModal = true">关于</span>
+      <span class="github"   @click="jumpTo('https://github.com/xionglongbing/Treasure-Navigation')">Github</span>
     </div>
     <!-- 关于 -->
-    <n-modal
+    <!-- <n-modal
       preset="card"
       :bordered="false"
       v-model:show="aboutSiteModal"
       transform-origin="center"
     >
-      <div class="about-modal">
-        <div class="about">
+      <div class="github-modal">
+        <div class="github">
           <span class="name">{{ siteName }}</span>
           <span class="version">v {{ packageJson.version }}</span>
         </div>
@@ -31,7 +28,7 @@
           </n-space>
         </div>
       </div>
-    </n-modal>
+    </n-modal> -->
   </footer>
 </template>
 
@@ -101,7 +98,7 @@ const jumpTo = (url: string) => {
         margin-right: 4px;
       }
     }
-    .about {
+    .github {
       &::before {
         content: '|';
         margin-right: 4px;
@@ -109,7 +106,7 @@ const jumpTo = (url: string) => {
     }
     .anthor,
     .icp,
-    .about {
+    .github {
       cursor: pointer;
       &:hover {
         opacity: 1;
@@ -117,9 +114,9 @@ const jumpTo = (url: string) => {
     }
   }
 }
-.about-modal {
+.github-modal {
   margin-bottom: 10px;
-  .about {
+  .github {
     display: flex;
     flex-direction: column;
     align-items: center;

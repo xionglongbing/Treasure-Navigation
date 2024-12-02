@@ -28,6 +28,7 @@
         </div>
       </Transition>
       <NoteDetail />
+      <Footer/>
     </div>
   </Provider>
 </template>
@@ -43,6 +44,7 @@ import Provider from '@/components/Provider.vue';
 import Cover from '@/components/Cover.vue';
 import SearchInp from '@/components/SearchInput/SearchInp.vue';
 import WeatherTime from '@/components/WeatherTime/index.vue';
+import Footer from '@/components/Footer.vue';
 // import MainColorModal from '@/components/MainColorModal/index.vue';
 import AllFunc from '@/components/AllFunc/index.vue';
 import NoteDetail from '@/components/Note/NoteDetail.vue';
