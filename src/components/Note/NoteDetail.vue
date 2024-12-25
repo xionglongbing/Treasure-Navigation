@@ -1,18 +1,16 @@
 <template>
-  <div class="note-detail__content" v-show="noteStore.displayNoteDetailData">
+  <div class="note-detail__content">
     <DraggableContainer
       :width="defaultWidth"
       :height="defaultHeight"
-      :appendToBody="false"
+      :min-height="300"
+      :min-width="300"
+      :appendToBody="true"
+      v-model:show="showDragContain"
       :zIndex="99"
     >
-      <PicInPic
-        :show="showPicInPic"
-        @closePicInPicEvent="closePicInPicEvent"
-      >
-        <Note
-          @enterPictureInPicture="enterPictureInPicture"
-        />
+      <PicInPic :show="showPicInPic" @closePicInPicEvent="closePicInPicEvent">
+        <Note @enterPictureInPicture="enterPictureInPicture" />
       </PicInPic>
     </DraggableContainer>
   </div>
@@ -32,6 +30,8 @@ const noteStore = useNoteDataStore();
 const defaultWidth = ref(400);
 const defaultHeight = ref(400);
 
+// 显示拖拽组件
+const showDragContain = computed(() => !!noteStore.displayNoteDetailData);
 // 画中画
 let showPicInPic = ref(false);
 function enterPictureInPicture() {
