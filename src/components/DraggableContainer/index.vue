@@ -35,8 +35,8 @@ const resizeTypes = Object.freeze(['lt', 't', 'rt', 'r', 'rb', 'b', 'lb', 'l']);
 const props = defineProps({
   appendToBody: { type: Boolean, default: true }, // 是否将容器插入到 body
   zIndex: { type: Number, default: 1 }, // 层级，控制显示顺序
-  left: { type: Number, default: 0 }, // 容器的初始 X 位置
-  top: { type: Number, default: 0 }, // 容器的初始 Y 位置
+  left: { type: Number, default: 200 }, // 容器的初始 X 位置
+  top: { type: Number, default: 200 }, // 容器的初始 Y 位置
   width: { type: Number, default: 300 }, // 容器的初始宽度
   height: { type: Number, default: 300 }, // 容器的初始高度
   minWidth: { type: Number, default: 100 }, // 容器的最小宽度
