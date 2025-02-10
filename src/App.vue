@@ -9,26 +9,26 @@
         </div>
       </header>
       <Transition name="fade" mode="out-in">
-        <!-- 主界面 -->
-        <main
-          class="layout-main"
-          v-if="status.imgLoadStatus"
-          :style="{ pointerEvents: mainClickable ? 'auto' : 'none' }"
-          @click="status.setMenuStatus('normal')"
-          @contextmenu="mainContextmenu"
-          @keydown="mainPressKeyboard"
-        >
-          <WeatherTime />
-          <SearchInp @contextmenu.stop />
-          <AllFunc @contextmenu.stop />
-        </main>
-        <div v-else id="loading">
-          <img src="/icon/logo.png" alt="logo" class="logo" />
-          <span class="tip">开发中</span>
-        </div>
+      <!-- 主界面 -->
+      <main
+        class="layout-main"
+        v-if="status.imgLoadStatus"
+        :style="{ pointerEvents: mainClickable ? 'auto' : 'none' }"
+        @click="status.setMenuStatus('normal')"
+        @contextmenu="mainContextmenu"
+        @keydown="mainPressKeyboard"
+      >
+        <WeatherTime />
+        <SearchInp @contextmenu.stop />
+        <AllFunc @contextmenu.stop />
+      </main>
+      <div v-else class="logoContent">
+        <img src="/icon/load.gif" alt="logo" class="logo" />
+        <span class="tip">加载中......</span>
+      </div>
       </Transition>
       <NoteDetail />
-      <Footer/>
+      <Footer />
     </div>
   </Provider>
 </template>
@@ -106,10 +106,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-#loading {
-  width: 100%;
-  height: 100%;
-}
 .page-main__layout {
   display: flex;
   flex-direction: column;
@@ -138,11 +134,20 @@ onMounted(() => {
     align-items: center;
   }
 }
-#loading {
+.logoContent {
   color: var(--main-text-color);
+  position: absolute;
+  width: 100%;
+  height: 100%;
   .logo {
+    position: absolute;
+    opacity: 0.3;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%);
     width: 100px;
     height: 100px;
+    border-radius: 50%;
     margin-bottom: 24px;
     animation: logo-breathe 3s infinite alternate;
   }
