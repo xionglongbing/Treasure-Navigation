@@ -23,8 +23,10 @@
         <AllFunc @contextmenu.stop />
       </main>
       <div v-else class="logoContent">
-        <img src="/icon/load.gif" alt="logo" class="logo" />
-        <span class="tip">加载中......</span>
+        <div class="logo">
+          <img src="/icon/load.gif" alt="logo" class="logoImg" />
+          <span class="tip">加载中......</span>
+        </div>
       </div>
       </Transition>
       <NoteDetail />
@@ -145,12 +147,15 @@ onMounted(() => {
     left: 50%;
     top: 50%;
     transform: translate(-50%);
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 24px;
     animation: logo-breathe 3s infinite alternate;
+    .logoImg {
+      display: block;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
   }
+
   .tip {
     font-size: 20px;
   }
