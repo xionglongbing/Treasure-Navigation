@@ -4,6 +4,7 @@
   <Teleport to="body" :disabled="!appendToBody">
     <!-- 创建一个容器，支持拖拽，使用 ref 引用该容器 -->
     <div
+      v-show="show"
       ref="draggableContainer"
       class="draggable-container"
       v-bind="$attrs"
@@ -33,6 +34,7 @@ const resizeTypes = Object.freeze(['lt', 't', 'rt', 'r', 'rb', 'b', 'lb', 'l']);
 
 // 定义组件的 props（外部传入的属性）
 const props = defineProps({
+  show: {type: Boolean,default: false}, // 是否显示画中画
   appendToBody: { type: Boolean, default: true }, // 是否将容器插入到 body
   zIndex: { type: Number, default: 1 }, // 层级，控制显示顺序
   left: { type: Number, default: 200 }, // 容器的初始 X 位置

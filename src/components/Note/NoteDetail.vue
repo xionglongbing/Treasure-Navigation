@@ -6,7 +6,7 @@
       :min-height="300"
       :min-width="300"
       :appendToBody="true"
-      v-model:show="showDragContain"
+      :show="showDragContain"
       :zIndex="99"
     >
       <PicInPic :show="showPicInPic" @closePicInPicEvent="closePicInPicEvent">
