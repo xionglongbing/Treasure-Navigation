@@ -64,7 +64,7 @@
                 <div class="shortcut__icon-text" :title="websiteData.name">
                   <img
                     :src="formatUrlIndex(websiteData.url) + '/favicon.ico'"
-                    onerror="this.src='/icon/treasureBag.jpg';this.onerror=null;"
+                    onerror="this.src='icon/treasureBag.jpg';this.onerror=null;"
                     class="websiteData__favicon"
                   />
                   <span class="name">{{ websiteData.name }}</span>
