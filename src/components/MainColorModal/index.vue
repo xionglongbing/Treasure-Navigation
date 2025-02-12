@@ -38,7 +38,6 @@ defineOptions({
     overflow: hidden;
     height: 100%;
     :deep(.scrollbar) {
-      max-height: calc(64vh - 84px);
       transition: max-height 0.3s;
     }
     :deep(.set-item) {
@@ -95,9 +94,6 @@ defineOptions({
     overflow: hidden;
     height: 100%;
     :deep(.n-tab-pane) {
-      .scrollbar {
-        max-height: calc(64vh - 84px);
-      }
       .not-shortcut {
         min-height: calc(64vh - 84px);
       }
