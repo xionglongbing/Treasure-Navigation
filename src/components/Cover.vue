@@ -110,8 +110,8 @@ onMounted(() => {
     top: 0;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.5) 100%),
-      radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
+    background-image: radial-gradient(rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.5) 100%),
+      radial-gradient(rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.3) 166%);
   }
 }
 </style>
