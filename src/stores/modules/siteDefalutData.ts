@@ -183,6 +183,13 @@ const useSiteDataStore = defineStore(
       deleteCategoryData
     };
   },
+  {
+    persist: {
+      key: 'siteDefalutData',
+      storage: window.localStorage,
+      pick: ['expandedCategoryNames'] // 只持久化 expandedCategoryNames，忽略 其他
+    }
+  }
 );
 
 export default useSiteDataStore;
