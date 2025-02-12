@@ -183,12 +183,6 @@ const useSiteDataStore = defineStore(
       deleteCategoryData
     };
   },
-  {
-    persist: {
-      key: 'siteDefalutData',
-      storage: window.localStorage
-    }
-  }
 );
 
 export default useSiteDataStore;
