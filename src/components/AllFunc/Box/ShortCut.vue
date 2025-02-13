@@ -388,6 +388,21 @@ function messageTip(messageInfo: MessageInfo) {
   }
   return messageInfo.state;
 }
+
+// 图片资源预获取
+(categoryDataList.value as { websiteDataList: { name: string, url: string }[] }[]).forEach(dataList => {
+  dataList.websiteDataList.forEach(item => {
+    const linkDom = document.createElement("link");
+    linkDom.as ="image";
+    linkDom.rel = "prefetch";
+    linkDom.crossOrigin = "";
+    const url = formatUrlIndex(item.url);
+    if(url) {
+      linkDom.href = url + '/favicon.ico';
+    }
+    document.head.appendChild(linkDom);
+  });
+});
 </script>
 <style lang="scss" scoped>
 :deep(.n-collapse) .n-collapse-item__header > .n-collapse-item__header-main {
