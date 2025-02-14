@@ -48,8 +48,11 @@ const picInPicContainer = ref<HTMLElement>();
 watch(
   () => props.show,
   async (val) => {
-    if (!isPicInPicSupported) return;
-
+    if (!isPicInPicSupported) {
+      window.$message.error("当前环境不支持画中画");
+      return;
+    }
+    
     if (val) {
       await createPicInPic(); // 创建画中画
       updateStoreData(); // 更新 store 数据
